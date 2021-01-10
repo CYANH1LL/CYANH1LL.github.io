@@ -6,25 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cyanh1ll.github.io">
-  <title>Hexo</title>
+  <title>Yu Wan’s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     
-    <!-- <meta name="keywords" content="">
+    <!-- <meta name="keywords" content="Java">
     <meta name="description" content="Blog for me"> -->
   
   <meta name="description" content="Blog for me">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Yu Wan’s Blog">
 <meta property="og:url" content="https://cyanh1ll.github.io/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Yu Wan’s Blog">
 <meta property="og:description" content="Blog for me">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Yu Wan">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -129,7 +130,7 @@
 			
 			
 			<div>
-				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="240" height="86" src="//music.163.com/outchain/player?type=2&id=531051865&auto=1&height=66"></iframe>
+				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="240" height="86" src="//music.163.com/outchain/player?type=2&id=30496494&auto=1&height=66"></iframe>
 			</div>
 			
 				
@@ -261,14 +262,9 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="Virtual-Memory-Concepts"><a href="#Virtual-Memory-Concepts" class="headerlink" title="Virtual Memory Concepts"></a>Virtual Memory Concepts</h2><h5 id="Virtual-Memory"><a href="#Virtual-Memory" class="headerlink" title="Virtual Memory"></a>Virtual Memory</h5><p>When process runs, page containing data that currently accessing (working set) will be mapped to physical ram. </p>
-<p>Virtual memory can be very important when you have multiple storage devices to manage(which is very common in today’s PC). It provides a abstract layer for memory management. Since we use virtual memory, we have to do address translation between virtual memory and physical memory. The corresponding responsible hardware in the CPU, often referred to as a memory management unit (MMU). </p>
-<h5 id="Pages"><a href="#Pages" class="headerlink" title="Pages:"></a>Pages:</h5><p>Commonly, implementations of virtual memory divide a virtual address space into pages (blocks of contiguous virtual memory addresses). </p>
-<h5 id="Page-Tables"><a href="#Page-Tables" class="headerlink" title="Page Tables"></a>Page Tables</h5><p>Each entry in the page table holds a flag indicating whether the corresponding page is in real memory or not. If it is in real memory, the page table entry will contain the real memory address at which the page is stored. When a reference is made to a page by the hardware, if the page table entry for the page indicates that it is not currently in real memory, the hardware raises a page fault exception, invoking the paging supervisor component of the operating system.</p>
-<h5 id="Paging-supervisor"><a href="#Paging-supervisor" class="headerlink" title="Paging supervisor"></a>Paging supervisor</h5><p>This part of the operating system creates and manages page tables. If the hardware raises a page fault exception, the paging supervisor accesses secondary storage, returns the page that has the virtual address that resulted in the page fault, updates the page tables to reflect the physical location of the virtual address and tells the translation mechanism to restart the request. It may utilize algorithm such as LRU when all physical memory is already in use.</p>
-<h5 id="Thrashing"><a href="#Thrashing" class="headerlink" title="Thrashing"></a>Thrashing</h5><p>It occurs when a computer’s virtual memory resources are overused, leading to a constant state of paging in/out and page faults, which causes the performance of the computer to degrade or collapse.</p>
-<h5 id="Demand-Paging"><a href="#Demand-Paging" class="headerlink" title="Demand Paging"></a>Demand Paging</h5><p>This is a page strategy when  copies a disk page into physical memory only if an attempt is made to access it and that page is not already in memory (page fault occurs).</p>
-<h2 id="Context-Switch"><a href="#Context-Switch" class="headerlink" title="Context Switch"></a>Context Switch</h2><p>Context switch occurs when switch between different processes(not threads !!!). This is expensive and with a lot of overheads. It requires switching of different page tables for different processes. TLB information for a process is also lost (being flushed actually) when conducting context switch.</p>
-
+    
+    <a class="article-more-a" href="/2021/01/07/review/#more">more >></a>
+    
     
 
     
@@ -344,12 +340,9 @@
     
     <p>RPC stands for remote procedure calls.</p>
 <p>Complexity and latency of RPC vs. local calls?</p>
-<p>local call: pretty fast, only program counter or pointers change</p>
-<p>RPC: involves marshalling/unmarshalling, error handling, authentication , authorization, session, heap manipulation. </p>
-<p>Given that, in real life, RPC is useful. It can be used for those client who has small computing power and most of works will be finished at remote end. </p>
-<p>What is IDL(Interface Description Language)?</p>
-<p>It is a language that describe an interface in a language-independent way, which means that the communication between different software components can be written in different language(e.g c++, Java) . IDLs offer a bridge between the two different systems, therefore is commonly used in RPC. Example of it is JAVA, XML, Google protocol buffers.</p>
-
+    
+    <a class="article-more-a" href="/2021/01/07/%5BStudy%20Notes%5D%20RPC/#more">more >></a>
+    
     
 
     

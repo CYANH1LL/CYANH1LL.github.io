@@ -6,23 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cyanh1ll.github.io">
-  <title>Study Notes -- systems concepts review | Hexo</title>
+  <title>Study Notes -- systems concepts review | Yu Wan’s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Virtual Memory ConceptsVirtual MemoryWhen process runs, page containing data that currently accessing (working set) will be mapped to physical ram.  Virtual memory can be very important when you have">
+  <meta name="description" content="Virtual Memory ConceptsVirtual MemoryWhen process runs, page containing data that currently accessing (working set) will be mapped to physical ram.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study Notes -- systems concepts review">
 <meta property="og:url" content="https://cyanh1ll.github.io/2021/01/07/review/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Virtual Memory ConceptsVirtual MemoryWhen process runs, page containing data that currently accessing (working set) will be mapped to physical ram.  Virtual memory can be very important when you have">
+<meta property="og:site_name" content="Yu Wan’s Blog">
+<meta property="og:description" content="Virtual Memory ConceptsVirtual MemoryWhen process runs, page containing data that currently accessing (working set) will be mapped to physical ram.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-08T03:57:25.000Z">
-<meta property="article:modified_time" content="2021-01-08T04:52:00.748Z">
+<meta property="article:modified_time" content="2021-01-09T23:58:56.467Z">
 <meta property="article:author" content="Yu Wan">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -127,7 +128,7 @@
 			
 			
 			<div>
-				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="240" height="86" src="//music.163.com/outchain/player?type=2&id=531051865&auto=1&height=66"></iframe>
+				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="240" height="86" src="//music.163.com/outchain/player?type=2&id=30496494&auto=1&height=66"></iframe>
 			</div>
 			
 				
@@ -275,6 +276,8 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="Virtual-Memory-Concepts"><a href="#Virtual-Memory-Concepts" class="headerlink" title="Virtual Memory Concepts"></a>Virtual Memory Concepts</h2><h5 id="Virtual-Memory"><a href="#Virtual-Memory" class="headerlink" title="Virtual Memory"></a>Virtual Memory</h5><p>When process runs, page containing data that currently accessing (working set) will be mapped to physical ram. </p>
+<a id="more"></a>
+
 <p>Virtual memory can be very important when you have multiple storage devices to manage(which is very common in today’s PC). It provides a abstract layer for memory management. Since we use virtual memory, we have to do address translation between virtual memory and physical memory. The corresponding responsible hardware in the CPU, often referred to as a memory management unit (MMU). </p>
 <h5 id="Pages"><a href="#Pages" class="headerlink" title="Pages:"></a>Pages:</h5><p>Commonly, implementations of virtual memory divide a virtual address space into pages (blocks of contiguous virtual memory addresses). </p>
 <h5 id="Page-Tables"><a href="#Page-Tables" class="headerlink" title="Page Tables"></a>Page Tables</h5><p>Each entry in the page table holds a flag indicating whether the corresponding page is in real memory or not. If it is in real memory, the page table entry will contain the real memory address at which the page is stored. When a reference is made to a page by the hardware, if the page table entry for the page indicates that it is not currently in real memory, the hardware raises a page fault exception, invoking the paging supervisor component of the operating system.</p>
