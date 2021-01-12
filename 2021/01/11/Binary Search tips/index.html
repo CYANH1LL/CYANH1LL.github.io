@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cyanh1ll.github.io">
-  <title>Study Notes -- Implementation of  Gossip/SWIM as Failure Detector in Distributed System | Yu Wan’s Blog</title>
+  <title>Study Notes -- Binary Search Tips | Yu Wan’s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="The experience of implementing  Gossip&#x2F;SWIM  in Multicast through Coursera Cloud Computing course.">
+  <meta name="description" content="Binary Search is one of the most common techniques being used in scenarios of searching. It has many types of variants and I would like to discuss some of it and why the edge cases are designed like t">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Study Notes -- Implementation of  Gossip&#x2F;SWIM as Failure Detector in Distributed System">
-<meta property="og:url" content="https://cyanh1ll.github.io/2021/01/09/cloud1/index.html">
+<meta property="og:title" content="Study Notes -- Binary Search Tips">
+<meta property="og:url" content="https://cyanh1ll.github.io/2021/01/11/Binary%20Search%20tips/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="The experience of implementing  Gossip&#x2F;SWIM  in Multicast through Coursera Cloud Computing course.">
+<meta property="og:description" content="Binary Search is one of the most common techniques being used in scenarios of searching. It has many types of variants and I would like to discuss some of it and why the edge cases are designed like t">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-10T00:55:08.000Z">
-<meta property="article:modified_time" content="2021-01-10T02:14:16.757Z">
+<meta property="article:published_time" content="2021-01-12T02:27:13.000Z">
+<meta property="article:modified_time" content="2021-01-12T03:32:08.597Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -227,14 +227,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-cloud1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Binary Search tips" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      Study Notes -- Implementation of  Gossip/SWIM as Failure Detector in Distributed System
+      Study Notes -- Binary Search Tips
     </h1>
   
 
@@ -246,8 +246,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/01/09/cloud1/" class="archive-article-date">
-        <time datetime="2021-01-10T00:55:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-09</time>
+<a href="/2021/01/11/Binary%20Search%20tips/" class="archive-article-date">
+        <time datetime="2021-01-12T02:27:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-11</time>
 </a>
 
   
@@ -260,7 +260,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">13字</span>
+      <span class="post-count">947字</span>
     </span>
   </span>
 
@@ -269,7 +269,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -280,8 +280,43 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="The-experience-of-implementing-Gossip-SWIM-in-Multicast-through-Coursera-Cloud-Computing-course"><a href="#The-experience-of-implementing-Gossip-SWIM-in-Multicast-through-Coursera-Cloud-Computing-course" class="headerlink" title="The experience of implementing  Gossip/SWIM  in Multicast through Coursera Cloud Computing course."></a>The experience of implementing  Gossip/SWIM  in Multicast through Coursera Cloud Computing course.</h3><a id="more"></a>
+    <p>Binary Search is one of the most common techniques being used in scenarios of searching. It has many types of variants and I would like to discuss some of it and why the edge cases are designed like this.</p>
+<a id="more"></a>
 
+<h3 id="1-Search-for-a-element-in-array-familiar"><a href="#1-Search-for-a-element-in-array-familiar" class="headerlink" title="1.Search for a element in array (familiar)"></a>1.Search for a element in array (familiar)</h3><p>This is probably the most common way to use binary search. It involves finding mid point within a range and thus divides the range (smaller the search range) based on the midpoint. Common implementation is:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">int</span> right = nums.length - <span class="number">1</span>; <span class="comment">// key criterion </span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right) &#123; <span class="comment">// key criteria</span></span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">            <span class="keyword">return</span> mid; <span class="comment">// key criterion, directly return</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)</span><br><span class="line">            left = mid + <span class="number">1</span>; <span class="comment">// key criterion</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">            right = mid - <span class="number">1</span>; <span class="comment">// key criterion</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Some important value includes: value of initial right, different value assignment in three different cases (less than, larger than, or equal to), and the criterion of while loop (&lt; or &lt;= ?).</p>
+<ol>
+<li><p>value of right: By assigning “nums.length - 1”, we means that we are searching in range [left, right] (right boundary inclusive).If “nums.length”, then we are saying [left, right) (right boundary inclusive)</p>
+</li>
+<li><p>while loop criterion (&lt; or &lt;=) : By assigning &lt;, we should jump out of the loop when left == right, which means that [left, right] will results in a omitted value, and [left, right) will not omit. Therefore when we pick the criterion, we should adjust the initial value of right accordingly to avoid unexpected behavior.</p>
+</li>
+</ol>
+<p>In short: (right = nums.length - 1, then while &lt;=), (right = nums.length, then while &lt;)</p>
+<ol start="3">
+<li><p>Different cases for &lt;, &gt; , ==: The value assignment for different case really depends on what you would like to find</p>
+<ol>
+<li><p>Find index of a element (value may have duplicate, so random occurrence): &lt; : left = mid + 1, &gt;:right = mid - 1, == : return mid;</p>
+</li>
+<li><p>Find index of the left boundary (first occurrence) of a element:</p>
+<p>&lt; : left = mid + 1, &gt;:right = mid - 1, == : right = mid - 1 (narrow the right boundary to finally get the left bound);</p>
+</li>
+<li><p>Find index of the right boundary (last occurrence) of a element:</p>
+<p>&lt; : left = mid + 1, &gt;:right = mid - 1, == : left = mid + 1 (narrow the left boundary to finally get the right bound);</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>When find left bound or right bound, be careful of indexOutBoundary error when the target element is bigger/smaller than all elements in array. In that case,  right value will be left - 1/left value be right +1. For example, when we end up with range such as  [9(left), 8(right)], apparently, it is not reasonable to take left bound 9 as our final left bound since the range contain no value. So, make sure we check for rationality at the end.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Finally, after while loop, check Out of Boundary error</span></span><br><span class="line">    <span class="keyword">if</span> (left &gt;= nums.length || nums[left] != target)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br></pre></td></tr></table></figure>
+
+
+<p>To Wrap this up, we have three different implementation template for finding index, first occurrence (left bound) ,and last occurrence(right bound) as follows:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// To keep consistency, we use nums.length - 1 for right, and &lt;= criterion in while loop</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binary_search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>; </span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] == target) &#123;</span><br><span class="line">            <span class="comment">// directly return</span></span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> 	</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">left_bound</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            <span class="comment">// No return, keep narrowing the right bound</span></span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// check left bound rationality</span></span><br><span class="line">    <span class="keyword">if</span> (left &gt;= nums.length || nums[left] != target)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">right_bound</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            <span class="comment">// No return, keep narrowing the left bound</span></span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// check right bound rationality</span></span><br><span class="line">    <span class="keyword">if</span> (right &lt; <span class="number">0</span> || nums[right] != target)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>Besides my provided templates, there are many different implementations, some embedded condition checked edition are like:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">left_bound</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// new variable to record final result</span></span><br><span class="line">    <span class="keyword">int</span> res = -<span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            <span class="comment">// No return, keep narrowing the right bound</span></span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// New operation to record </span></span><br><span class="line">        <span class="keyword">if</span>(nums[mid] == target) &#123;</span><br><span class="line">            res = mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">right_bound</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// new variable to record final result</span></span><br><span class="line">    <span class="keyword">int</span> res = -<span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            <span class="comment">// No return, keep narrowing the left bound</span></span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// New operation to record </span></span><br><span class="line">        <span class="keyword">if</span>(nums[mid] == target) &#123;</span><br><span class="line">            res = mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
 
@@ -296,7 +331,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://cyanh1ll.github.io/2021/01/09/cloud1/" title="Study Notes -- Implementation of  Gossip/SWIM as Failure Detector in Distributed System" target="_blank">https://cyanh1ll.github.io/2021/01/09/cloud1/</a>
+          <a href="https://cyanh1ll.github.io/2021/01/11/Binary Search tips/" title="Study Notes -- Binary Search Tips" target="_blank">https://cyanh1ll.github.io/2021/01/11/Binary Search tips/</a>
         </li>
         
         <li>
@@ -363,7 +398,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://cyanh1ll.github.io/2021/01/09/cloud1/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://cyanh1ll.github.io/2021/01/11/Binary%20Search%20tips/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -378,18 +413,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/01/11/Binary%20Search%20tips/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Study Notes -- Binary Search Tips
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/07/review/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Study Notes -- systems concepts review</div>
+    <a href="/2021/01/09/cloud1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Study Notes -- Implementation of  Gossip/SWIM as Failure Detector in Distributed System</div>
       <i class="icon-circle-right"></i>
     </a>
   
