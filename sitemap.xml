@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://cyanh1ll.github.io/2021/01/09/cloud1/</loc>
+    
+    <lastmod>2021-01-10</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://cyanh1ll.github.io/2021/01/07/review/</loc>
     
     <lastmod>2021-01-09</lastmod>
@@ -32,7 +39,7 @@
 
   <url>
     <loc>https://cyanh1ll.github.io/</loc>
-    <lastmod>2021-01-10</lastmod>
+    <lastmod>2021-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
