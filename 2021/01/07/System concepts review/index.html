@@ -6,21 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cyanh1ll.github.io">
-  <title>how to use markdown editor? | Yu Wan’s Blog</title>
+  <title>Systems concepts review | Yu Wan’s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Blog for me">
+  <meta name="description" content="Virtual Memory ConceptsVirtual MemoryWhen process runs, page containing data that currently accessing (working set) will be mapped to physical ram.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="how to use markdown editor?">
-<meta property="og:url" content="https://cyanh1ll.github.io/2021/01/05/Editor/index.html">
+<meta property="og:title" content="Systems concepts review">
+<meta property="og:url" content="https://cyanh1ll.github.io/2021/01/07/System%20concepts%20review/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="Blog for me">
+<meta property="og:description" content="Virtual Memory ConceptsVirtual MemoryWhen process runs, page containing data that currently accessing (working set) will be mapped to physical ram.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-06T05:19:02.000Z">
-<meta property="article:modified_time" content="2021-01-06T05:26:40.224Z">
+<meta property="article:published_time" content="2021-01-08T03:57:25.000Z">
+<meta property="article:modified_time" content="2021-01-15T03:03:03.532Z">
 <meta property="article:author" content="Yu Wan">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Study Notes">
+<meta property="article:tag" content="System Programming">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
@@ -81,7 +82,7 @@
 			
 				<li><a href="https://github.com/CYANH1LL/" target="_blank">Tech Notes</a></li>
 			
-				<li><a href="/tags/Random%20Chat/" target="_blank">Random Chat</a></li>
+				<li><a href="/img/Yu_Wan_Resume.pdf" target="_blank">Resume</a></li>
 			
 			</ul>
 		</nav>
@@ -211,7 +212,7 @@
 		        
 					<li style="width: 33.333333333333336%"><a target="_blank" rel="noopener" href="https://github.com/CYANH1LL/">Tech Notes</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/Random%20Chat/">Random Chat</a></li>
+					<li style="width: 33.333333333333336%"><a href="/img/Yu_Wan_Resume.pdf">Resume</a></li>
 		        
 				</ul>
 			</nav>
@@ -227,14 +228,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Editor" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-System concepts review" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      how to use markdown editor?
+      Systems concepts review
     </h1>
   
 
@@ -246,8 +247,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/01/05/Editor/" class="archive-article-date">
-        <time datetime="2021-01-06T05:19:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-05</time>
+<a href="/2021/01/07/System%20concepts%20review/" class="archive-article-date">
+        <time datetime="2021-01-08T03:57:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-07</time>
 </a>
 
   
@@ -260,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">0字</span>
+      <span class="post-count">379字</span>
     </span>
   </span>
 
@@ -269,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -280,7 +281,17 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    
+    <h2 id="Virtual-Memory-Concepts"><a href="#Virtual-Memory-Concepts" class="headerlink" title="Virtual Memory Concepts"></a>Virtual Memory Concepts</h2><h5 id="Virtual-Memory"><a href="#Virtual-Memory" class="headerlink" title="Virtual Memory"></a>Virtual Memory</h5><p>When process runs, page containing data that currently accessing (working set) will be mapped to physical ram. </p>
+<a id="more"></a>
+
+<p>Virtual memory can be very important when you have multiple storage devices to manage(which is very common in today’s PC). It provides a abstract layer for memory management. Since we use virtual memory, we have to do address translation between virtual memory and physical memory. The corresponding responsible hardware in the CPU, often referred to as a memory management unit (MMU). </p>
+<h5 id="Pages"><a href="#Pages" class="headerlink" title="Pages:"></a>Pages:</h5><p>Commonly, implementations of virtual memory divide a virtual address space into pages (blocks of contiguous virtual memory addresses). </p>
+<h5 id="Page-Tables"><a href="#Page-Tables" class="headerlink" title="Page Tables"></a>Page Tables</h5><p>Each entry in the page table holds a flag indicating whether the corresponding page is in real memory or not. If it is in real memory, the page table entry will contain the real memory address at which the page is stored. When a reference is made to a page by the hardware, if the page table entry for the page indicates that it is not currently in real memory, the hardware raises a page fault exception, invoking the paging supervisor component of the operating system.</p>
+<h5 id="Paging-supervisor"><a href="#Paging-supervisor" class="headerlink" title="Paging supervisor"></a>Paging supervisor</h5><p>This part of the operating system creates and manages page tables. If the hardware raises a page fault exception, the paging supervisor accesses secondary storage, returns the page that has the virtual address that resulted in the page fault, updates the page tables to reflect the physical location of the virtual address and tells the translation mechanism to restart the request. It may utilize algorithm such as LRU when all physical memory is already in use.</p>
+<h5 id="Thrashing"><a href="#Thrashing" class="headerlink" title="Thrashing"></a>Thrashing</h5><p>It occurs when a computer’s virtual memory resources are overused, leading to a constant state of paging in/out and page faults, which causes the performance of the computer to degrade or collapse.</p>
+<h5 id="Demand-Paging"><a href="#Demand-Paging" class="headerlink" title="Demand Paging"></a>Demand Paging</h5><p>This is a page strategy when  copies a disk page into physical memory only if an attempt is made to access it and that page is not already in memory (page fault occurs).</p>
+<h2 id="Context-Switch"><a href="#Context-Switch" class="headerlink" title="Context Switch"></a>Context Switch</h2><p>Context switch occurs when switch between different processes(not threads !!!). This is expensive and with a lot of overheads. It requires switching of different page tables for different processes. TLB information for a process is also lost (being flushed actually) when conducting context switch.</p>
+
     
 
     
@@ -294,7 +305,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://cyanh1ll.github.io/2021/01/05/Editor/" title="how to use markdown editor?" target="_blank">https://cyanh1ll.github.io/2021/01/05/Editor/</a>
+          <a href="https://cyanh1ll.github.io/2021/01/07/System concepts review/" title="Systems concepts review" target="_blank">https://cyanh1ll.github.io/2021/01/07/System concepts review/</a>
         </li>
         
         <li>
@@ -311,6 +322,21 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">System Programming</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     
@@ -361,7 +387,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://cyanh1ll.github.io/2021/01/05/Editor/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://cyanh1ll.github.io/2021/01/07/System%20concepts%20review/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -376,18 +402,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/01/07/%5BStudy%20Notes%5D%20RPC/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/01/09/Implementation%20of%20%20GossipSWIM%20as%20Failure%20Detector%20in%20Distributed%20System/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Study Notes -- RPC
+          Implementation of  Gossip/SWIM as Failure Detector in Distributed System
         
       </div>
     </a>
   
   
-    <a href="/2021/01/05/My-first-blog-here/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">My first blog here!</div>
+    <a href="/2021/01/07/%5BStudy%20Notes%5D%20RPC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RPC</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -564,6 +590,22 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Cloud Computing</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Study Notes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">System Programming</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Algorithm</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
