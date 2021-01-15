@@ -18,7 +18,7 @@
 <meta property="og:description" content="For mutual Exclusion in Distributed System, we need to guarantee 3 propterties:  Safety (essential): Nothing bad happens Liveness (essential): Every request is granted eventually Ordering (desirable):">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-15T04:10:12.000Z">
-<meta property="article:modified_time" content="2021-01-15T05:54:01.149Z">
+<meta property="article:modified_time" content="2021-01-15T20:42:52.358Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">499字</span>
+      <span class="post-count">598字</span>
     </span>
   </span>
 
@@ -310,9 +310,11 @@
 <p>For this algorithm, we can see that the best case and worst case is largely different since it is based on where the token is and when a process enters a critical section.</p>
 <h2 id="Ricart-Agrawala’s-Algorithm"><a href="#Ricart-Agrawala’s-Algorithm" class="headerlink" title="Ricart-Agrawala’s Algorithm"></a>Ricart-Agrawala’s Algorithm</h2><p>Each process has its own “state” indicating its status, including: “Wanted”, “Held”, “Released”.</p>
 <p>When one process $P_i$ wants to enter critical section, it:</p>
-<pre><code>1. **For $P_i$**, set state = &quot;wanted&quot;, then multicast &quot;Request&quot; in form of &lt;$T_i, P_i$&gt; to all processes, where $T_i$ is lamport timestamp, $P_i$ is process id. 
-2. wait until all processes send back &quot;Reply&quot; message, then change state = &quot;Held&quot; to enter the critical section
-3. **For those who received &lt;$T_i, P_i$&gt;**, if its state = &quot;Held&quot; or it is also in &quot;wanted&quot; and its timestamp is smaller/earlier than the request, it put the request into local queue. Else, it send &quot;Reply&quot; back to $P_i$ .</code></pre>
+<ol>
+<li><strong>For $P_i$</strong>, set state = “wanted”, then multicast “Request” in form of &lt;$T_i, P_i$&gt; to all processes, where $T_i$ is lamport timestamp, $P_i$ is process id. </li>
+<li>wait until all processes send back “Reply” message, then change state = “Held” to enter the critical section</li>
+<li><strong>For those who received &lt;$T_i, P_i$&gt;</strong>, if its state = “Held” or it is also in “wanted” and its timestamp is smaller/earlier than the request, it put the request into local queue. Else, it send “Reply” back to $P_i$ .</li>
+</ol>
 <p>When one process $P_i$ wants to exit critical section:</p>
 <ol>
 <li>It changes state to “Released” and send “Reply” to all queued requests.</li>
@@ -322,7 +324,13 @@
 <p>The intersection of any two voting sets must be non-empty, kinda like quorums.</p>
 <p>In terms of size, each process belongs to M other sets, each sets is of size K, and K = M = $\sqrt{N}$ is proved to be best.</p>
 <p>One approach is to put N processes into $\sqrt{N}$ * $\sqrt{N}$ matrix, for each process p, v = i + j, where i is row number of p and j is column number.</p>
-<p>Compared to Ricart-Agrawala’s Algorithm, it only requires some processes in group to send reply back.</p>
+<p>Compared to Ricart-Agrawala’s Algorithm, it only requires processes in group to send reply (vote) back. Each process maintains a local variable called “votes”.</p>
+<p> Pseudocode as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">state &#x3D; Released, voted &#x3D; false</span><br><span class="line"></span><br><span class="line">enter() at process Pi:</span><br><span class="line">	state &#x3D; wanted;</span><br><span class="line">	muticast Request message to all processes in Vi</span><br><span class="line">	Wait for Reply (vote) messages from all processes in Vi (including self)</span><br><span class="line">	state &#x3D; Held</span><br><span class="line">	</span><br><span class="line">exit() at process Pi:</span><br><span class="line">	state &#x3D; Released</span><br><span class="line">	Multicast Release to all processes in Vi</span><br><span class="line">	</span><br><span class="line">When Pi receives a Request from Pj:</span><br><span class="line"></span><br><span class="line"> 	if (state &#x3D;&#x3D; Held or voted &#x3D;&#x3D;  true):</span><br><span class="line"> 		enqueue Request</span><br><span class="line"> 	else:</span><br><span class="line"> 		send Reply to Pj and voted &#x3D; true</span><br><span class="line"> </span><br><span class="line">When Pi receives a Release from Pj:</span><br><span class="line">	</span><br><span class="line">	if (queue is empty):</span><br><span class="line">   		voted &#x3D; false</span><br><span class="line">    else : </span><br><span class="line">    	dequeu head of queue, Pk</span><br><span class="line">    	send Reply only to Pk</span><br><span class="line">    	voted &#x3D; true</span><br></pre></td></tr></table></figure>
+
+
+
+
 
     
 
@@ -433,6 +441,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2021/01/15/RPC2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          RPC2
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/14/The%20Leader%20Election%20Problem/" id="article-nav-older" class="article-nav-link-wrap">
