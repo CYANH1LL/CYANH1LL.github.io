@@ -6,23 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cyanh1ll.github.io">
-  <title>Yu Wan’s Blog</title>
+  <title>Mutual Exclusion | Yu Wan’s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="Java">
-    <meta name="description" content="Blog for me"> -->
-  
-  <meta name="description" content="Blog for me">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yu Wan’s Blog">
-<meta property="og:url" content="https://cyanh1ll.github.io/index.html">
+  <meta name="description" content="For mutual Exclusion in Distributed System, we need to guarantee 3 propterties:  Safety (essential): Nothing bad happens Liveness (essential): Every request is granted eventually Ordering (desirable):">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mutual Exclusion">
+<meta property="og:url" content="https://cyanh1ll.github.io/2021/01/14/mutual/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="Blog for me">
+<meta property="og:description" content="For mutual Exclusion in Distributed System, we need to guarantee 3 propterties:  Safety (essential): Nothing bad happens Liveness (essential): Every request is granted eventually Ordering (desirable):">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-15T04:10:12.000Z">
+<meta property="article:modified_time" content="2021-01-15T05:52:37.589Z">
 <meta property="article:author" content="Yu Wan">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Cloud Computing">
+<meta property="article:tag" content="Study Notes">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
@@ -229,25 +228,25 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-mutual" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-mutual" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/14/mutual/" target="_blank">Mutual Exclusion</a>
-  
+    <h1 class="article-title" itemprop="name">
+      Mutual Exclusion
     </h1>
   
 
 
   
   
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2021/01/14/mutual/" class="archive-article-date">
         <time datetime="2021-01-15T04:10:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-14</time>
 </a>
@@ -255,6 +254,27 @@
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">499字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
@@ -307,97 +327,25 @@
     
 
     
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/14/mutual/">Expand >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Yu Wan
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://cyanh1ll.github.io/2021/01/14/mutual/" title="Mutual Exclusion" target="_blank">https://cyanh1ll.github.io/2021/01/14/mutual/</a>
+        </li>
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
+        <li>
+          <strong>版权声明： </strong>
+          
+          CYANH1LL
+        </li>
         
-        
+      </ul>
     </div>
-</aside>
-
-
-
-
-  
-    <article id="post-The Leader Election Problem" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/14/The%20Leader%20Election%20Problem/" target="_blank">The Leader Election Problem</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/14/The%20Leader%20Election%20Problem/" class="archive-article-date">
-        <time datetime="2021-01-15T02:42:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-14</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>The Leader Election Problem is classical and has been useful in many variants of systems, including cloud computing systems.</p>
-    
-    <a class="article-more-a" href="/2021/01/14/The%20Leader%20Election%20Problem/#more">more >></a>
-    
-    
-
-    
-
     
 
   </div>
@@ -422,16 +370,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/14/The%20Leader%20Election%20Problem/">Expand >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://cyanh1ll.github.io/2021/01/14/mutual/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/14/The%20Leader%20Election%20Problem/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">The Leader Election Problem</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -452,451 +460,14 @@
 
 
 
-  
-    <article id="post-Binary Search tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/11/Binary%20Search%20tips/" target="_blank">Binary Search Tips</a>
-  
-    </h1>
-  
 
 
-  
-  
-<a href="/2021/01/11/Binary%20Search%20tips/" class="archive-article-date">
-        <time datetime="2021-01-12T02:27:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-11</time>
-</a>
 
-  
-  
-    
 
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>Binary Search is one of the most common techniques being used in scenarios of searching. It has many types of variants and I would like to discuss some of it and why the edge cases are designed like this.</p>
-    
-    <a class="article-more-a" href="/2021/01/11/Binary%20Search%20tips/#more">more >></a>
-    
-    
 
-    
 
-    
 
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/11/Binary%20Search%20tips/">Expand >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Implementation of  GossipSWIM as Failure Detector in Distributed System" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/09/Implementation%20of%20%20GossipSWIM%20as%20Failure%20Detector%20in%20Distributed%20System/" target="_blank">Implementation of  Gossip/SWIM as Failure Detector in Distributed System</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/09/Implementation%20of%20%20GossipSWIM%20as%20Failure%20Detector%20in%20Distributed%20System/" class="archive-article-date">
-        <time datetime="2021-01-10T00:55:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="The-experience-of-implementing-Gossip-SWIM-in-Multicast-through-Coursera-Cloud-Computing-course"><a href="#The-experience-of-implementing-Gossip-SWIM-in-Multicast-through-Coursera-Cloud-Computing-course" class="headerlink" title="The experience of implementing  Gossip/SWIM  in Multicast through Coursera Cloud Computing course."></a>The experience of implementing  Gossip/SWIM  in Multicast through Coursera Cloud Computing course.</h3>
-    
-    <a class="article-more-a" href="/2021/01/09/Implementation%20of%20%20GossipSWIM%20as%20Failure%20Detector%20in%20Distributed%20System/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/09/Implementation%20of%20%20GossipSWIM%20as%20Failure%20Detector%20in%20Distributed%20System/">Expand >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-System concepts review" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/07/System%20concepts%20review/" target="_blank">Systems concepts review</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/07/System%20concepts%20review/" class="archive-article-date">
-        <time datetime="2021-01-08T03:57:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="Virtual-Memory-Concepts"><a href="#Virtual-Memory-Concepts" class="headerlink" title="Virtual Memory Concepts"></a>Virtual Memory Concepts</h2><h5 id="Virtual-Memory"><a href="#Virtual-Memory" class="headerlink" title="Virtual Memory"></a>Virtual Memory</h5><p>When process runs, page containing data that currently accessing (working set) will be mapped to physical ram. </p>
-    
-    <a class="article-more-a" href="/2021/01/07/System%20concepts%20review/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">System Programming</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/07/System%20concepts%20review/">Expand >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-[Study Notes] RPC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/07/%5BStudy%20Notes%5D%20RPC/" target="_blank">RPC</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/07/%5BStudy%20Notes%5D%20RPC/" class="archive-article-date">
-        <time datetime="2021-01-08T02:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>RPC stands for remote procedure calls.</p>
-<p>Complexity and latency of RPC vs. local calls?</p>
-    
-    <a class="article-more-a" href="/2021/01/07/%5BStudy%20Notes%5D%20RPC/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">System Programming</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/07/%5BStudy%20Notes%5D%20RPC/">Expand >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-My-first-blog-here" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/05/My-first-blog-here/" target="_blank">My first blog here!</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/05/My-first-blog-here/" class="archive-article-date">
-        <time datetime="2021-01-06T01:03:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/05/My-first-blog-here/">Expand >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -936,8 +507,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
