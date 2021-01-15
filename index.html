@@ -269,39 +269,9 @@
 </ol>
 <p>Common solution such as semaphore is not plausible in DS since there is not shared resources in DS.</p>
 <p>So, we have different solution for this problem:</p>
-<h2 id="Central-Algorithm"><a href="#Central-Algorithm" class="headerlink" title="Central Algorithm"></a>Central Algorithm</h2><ol>
-<li><p>Elect a leader using election algorithm.</p>
-</li>
-<li><p>Construct Queue for request, when one is allowed to access resource(critical section), give it a token. When it is finished, give the token back to master.</p>
-<p>For this algorithm, safety and eventual liveness is guaranteed, FIFO ordering is guaranteed in order of requests received at master. The bottleneck of it  is the master server.</p>
-</li>
-</ol>
-<h2 id="Ring-based-Mutual-Exclusion"><a href="#Ring-based-Mutual-Exclusion" class="headerlink" title="Ring-based Mutual Exclusion"></a>Ring-based Mutual Exclusion</h2><p>N processes organized as ring, exactly token is passed around the ring. </p>
-<ol>
-<li><p>If one wants to enter the critical section, wait for the token. </p>
-</li>
-<li><p>When receive a token and is in critical section, use it then pass to the successor. </p>
-</li>
-<li><p>If not in critical section, directly pass to the successor. </p>
-</li>
-</ol>
-<p>For this algorithm, we can see that the best case and worst case is largely different since it is based on where the token is and when a process enters a critical section.</p>
-<h2 id="Ricart-Agrawala’s-Algorithm"><a href="#Ricart-Agrawala’s-Algorithm" class="headerlink" title="Ricart-Agrawala’s Algorithm"></a>Ricart-Agrawala’s Algorithm</h2><p>Each process has its own “state” indicating its status, including: “Wanted”, “Held”, “Released”.</p>
-<p>When one process $P_i$ wants to enter critical section, it:</p>
-<pre><code>1. **For $P_i$**, set state = &quot;wanted&quot;, then multicast &quot;Request&quot; in form of &lt;$T_i, P_i$&gt; to all processes, where $T_i$ is lamport timestamp, $P_i$ is process id. 
- 2. wait until all processes send back &quot;Reply&quot; message, then change state = &quot;Held&quot; to enter the critical section
- 3. **For those who received &lt;$T_i, P_i$&gt;**, if its state = &quot;Held&quot; or it is also in &quot;wanted&quot; and its timestamp is smaller/earlier than the request, it put the request into local queue. Else, it send &quot;Reply&quot; back to $P_i$ .</code></pre>
-<p>When one process $P_i$ wants to exit critical section:</p>
-<ol>
-<li>It changes state to “Released” and send “Reply” to all queued requests.</li>
-</ol>
-<p>For this algorithm, Safety is guaranteed, ordering is guaranteed in the order of lamport timestamp, and the worst case is for a process $P_i$ to wait for N - 1 processes to send Reply back. </p>
-<h2 id="Maekawa’s-Algorithm"><a href="#Maekawa’s-Algorithm" class="headerlink" title="Maekawa’s Algorithm"></a>Maekawa’s Algorithm</h2><p>Each process is in a voting set, and each process belongs to its own voting set. </p>
-<p>The intersection of any two voting sets must be non-empty, kinda like quorums.</p>
-<p>In terms of size, each process belongs to M other sets, each sets is of size K, and K = M = $\sqrt{N}$ is proved to be best.</p>
-<p>One approach is to put N processes into $\sqrt{N}$ * $\sqrt{N}$ matrix, for each process p, v = i + j, where i is row number of p and j is column number.</p>
-<p>Compared to Ricart-Agrawala’s Algorithm, it only requires some processes in group to send reply back.</p>
-
+    
+    <a class="article-more-a" href="/2021/01/14/mutual/#more">more >></a>
+    
     
 
     
