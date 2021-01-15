@@ -18,7 +18,7 @@
 <meta property="og:description" content="Concurrency control is about how to control multiple clients operation concurrently. Replication control is about how to handle operations when data is stored at multiple servers, with&#x2F;without replica">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-15T22:13:43.000Z">
-<meta property="article:modified_time" content="2021-01-15T22:46:51.868Z">
+<meta property="article:modified_time" content="2021-01-15T23:06:52.579Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">407字</span>
+      <span class="post-count">409字</span>
     </span>
   </span>
 
@@ -297,7 +297,7 @@
 </ol>
 <p>In a replication database, it should be guaranteed that it is “”<strong>one-copy-serializable</strong>“”, which means that the effect of transactions performed by clients on <strong>replicated **objects should be **the same as</strong> if they were performed <strong>one at a time</strong> on <strong>non-replicated</strong> objects.</p>
 <p>Also, since data in a transaction may be stored in different server, we should discuss the strategy of committing updates.</p>
-<h2 id="Two-phase-commit"><a href="#Two-phase-commit" class="headerlink" title="Two phase commit"></a>Two phase commit</h2><p>We select one leader server as coordinator to send update request made by a transaction to different server.</p>
+<h2 id="Two-phase-commit"><a href="#Two-phase-commit" class="headerlink" title="Two phase commit"></a>Two phase commit</h2><p>We select one leader server as coordinator to send update request made by a transaction to different server, stages are:</p>
 <ol>
 <li>First phase commit: send request to update, the servers respond with <strong>yes/no</strong> based on serializability and one-copy-serializability.</li>
 <li>Second phase commit: if any response of <strong>no</strong>/ time out on receiving, meaning that the transaction fails, then abort transaction. Send “abort” to server to roll back updates made if any. If no response of <strong>no</strong>, send “commit” to server to actually commit. </li>
@@ -416,6 +416,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2021/01/15/Stream/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Stream Processing in Apache Storm
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/15/Optimistic/" id="article-nav-older" class="article-nav-link-wrap">

@@ -18,7 +18,7 @@
 <meta property="og:description" content="Concurrency Control in distributed system including pessimistic control (such as read-write lock) and optimistic control. Here we discuss the optimistic approaches:">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-15T21:49:48.000Z">
-<meta property="article:modified_time" content="2021-01-15T22:13:29.699Z">
+<meta property="article:modified_time" content="2021-01-15T23:05:41.111Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">183字</span>
+      <span class="post-count">181字</span>
     </span>
   </span>
 
@@ -295,8 +295,10 @@
 <li>On read and write, find the correct version.</li>
 </ol>
 <h3 id="Vector-Clock-Approach"><a href="#Vector-Clock-Approach" class="headerlink" title="Vector Clock Approach"></a>Vector Clock Approach</h3><p>​    1. For each object, maintain a vector clock that records the timestamp for which have modified it.</p>
-<pre><code>2. It detect whether new write is strictly newer than current value. If it is, then do the update, if not, create a **sibling value ** which can be solved by user or pre-defined strategy in application.
- 3. To prevent vector is too long (too many entries),use size-based pruning. To prevent timestamp is too old and unnecessary to maintain, use time-based pruning.</code></pre>
+<ol start="2">
+<li>It detect whether new write is strictly newer than current value. If it is, then do the update, if not, create a **sibling value ** which can be solved by user or pre-defined strategy in application.</li>
+<li>To prevent vector is too long (too many entries),use size-based pruning. To prevent timestamp is too old and unnecessary to maintain, use time-based pruning.</li>
+</ol>
 
     
 
