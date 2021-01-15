@@ -6,22 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cyanh1ll.github.io">
-  <title>RPC2 | Yu Wan’s Blog</title>
+  <title>RPC in Distributed System | Yu Wan’s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Blog for me">
+  <meta name="description" content="RPC is a important abstraction for processes to call functions in other processes. In the context of distributed system, it is heavily used and are crucial.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RPC2">
+<meta property="og:title" content="RPC in Distributed System">
 <meta property="og:url" content="https://cyanh1ll.github.io/2021/01/15/RPC2/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="Blog for me">
+<meta property="og:description" content="RPC is a important abstraction for processes to call functions in other processes. In the context of distributed system, it is heavily used and are crucial.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cyanh1ll.github.io/2021/01/15/RPC2/RPC2/image-20210115151028133.png">
 <meta property="article:published_time" content="2021-01-15T20:43:36.000Z">
-<meta property="article:modified_time" content="2021-01-15T20:43:36.412Z">
+<meta property="article:modified_time" content="2021-01-15T21:12:54.291Z">
 <meta property="article:author" content="Yu Wan">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Study Notes">
+<meta property="article:tag" content="Cloud Computing">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cyanh1ll.github.io/2021/01/15/RPC2/RPC2/image-20210115151028133.png">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
   
@@ -234,7 +237,7 @@
   
   
     <h1 class="article-title" itemprop="name">
-      RPC2
+      RPC in Distributed System
     </h1>
   
 
@@ -260,7 +263,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">0字</span>
+      <span class="post-count">199字</span>
     </span>
   </span>
 
@@ -280,7 +283,26 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    
+    <p>RPC is a important abstraction for processes to call functions in other processes. In the context of distributed system, it is heavily used and are crucial.</p>
+<a id="more"></a>
+
+<p>LPC (local procedure call) often used stack to pass in arguments and data between two functions.</p>
+<p>RPC refers to the condition when two functions (caller and callee) are in two different processes. In this case, the function call come across the process (even machine) boundary.</p>
+<p>In RPC, it is hard to guarantee exactly-once semantics (function run for only once), different occasions may happen:</p>
+<ol>
+<li>Request/Reply message being dropped</li>
+<li>Calles process fails before executing the requested function</li>
+<li>Request message may be duplicated. etc.</li>
+</ol>
+<p>To deal with such occasion, re-execute/re-transmit may be implemented, which correspond to RPC semantics of at-least-once/at-most-once.</p>
+<p>In re-execute strategy, <strong>idempotent operation</strong> (operation can be repeat without side effect, such as x = 1,but not x = x + 1) can be used.</p>
+<p>RPC sample implementation:</p>
+<p><img src="RPC2/image-20210115151028133.png" alt="image-20210115151028133"></p>
+<p>Client stub: manage function signature and allow code reuse for LPC and RPC.</p>
+<p>Communication Module: In charge of requesting and receiving reply.</p>
+<p>Dispatcher: select which server to respond to request.</p>
+<p>Server stub: calls callee() and send back reply.</p>
+
     
 
     
@@ -294,7 +316,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://cyanh1ll.github.io/2021/01/15/RPC2/" title="RPC2" target="_blank">https://cyanh1ll.github.io/2021/01/15/RPC2/</a>
+          <a href="https://cyanh1ll.github.io/2021/01/15/RPC2/" title="RPC in Distributed System" target="_blank">https://cyanh1ll.github.io/2021/01/15/RPC2/</a>
         </li>
         
         <li>
@@ -311,6 +333,21 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     
@@ -375,6 +412,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2021/01/15/transaction/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Transaction in Distributed System
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/14/mutual/" id="article-nav-older" class="article-nav-link-wrap">
