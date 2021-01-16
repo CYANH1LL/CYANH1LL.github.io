@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Blog for me">
+  <meta name="description" content="Brought by the trend of social media,  large amounts of data is needed for real-time views.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stream Processing in Apache Storm">
 <meta property="og:url" content="https://cyanh1ll.github.io/2021/01/15/Stream/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="Blog for me">
+<meta property="og:description" content="Brought by the trend of social media,  large amounts of data is needed for real-time views.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-15T23:01:21.000Z">
-<meta property="article:modified_time" content="2021-01-15T23:04:33.081Z">
+<meta property="article:modified_time" content="2021-01-16T02:22:13.984Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">0字</span>
+      <span class="post-count">377字</span>
     </span>
   </span>
 
@@ -270,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -281,7 +281,42 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    
+    <p>Brought by the trend of social media,  large amounts of data is needed for real-time views.</p>
+<a id="more"></a>
+
+<h2 id="Stream-processing"><a href="#Stream-processing" class="headerlink" title="Stream processing"></a>Stream processing</h2><p>Stream processing is used to process large amount of data with low latency and high throughput. Some classical solution such as Mapreduce may not be efficient here since it is essentially batch processing and needs to wait for entire computation of a large dataset to complete before viewing (there is not intermediate result.). </p>
+<p>So I choode one of the most common project from Apache called : “Storm” to investigate its inner mechanism and components. </p>
+<h2 id="Apache-Storm"><a href="#Apache-Storm" class="headerlink" title="Apache Storm"></a>Apache Storm</h2><p>The component of storm stream processing includes entities: Tuples, Streams, Spouts, Bolts, Topologies.</p>
+<h3 id="Tuples"><a href="#Tuples" class="headerlink" title="Tuples"></a>Tuples</h3><p>Tuple is basically an ordered list of elements.</p>
+<h3 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h3><p>Stream is a sequence of tuples with potentially unbounded number.</p>
+<h3 id="Spouts"><a href="#Spouts" class="headerlink" title="Spouts"></a>Spouts</h3><p>Spouts is a storm entity(process) that is a source of streams, often read from crawlers of database.</p>
+<h3 id="Bolts"><a href="#Bolts" class="headerlink" title="Bolts"></a>Bolts</h3><p>Bolts is a storm entity(process) that: processes input streams, and outputs more stream for other bolts. In other word, this is the entity that actually process data. </p>
+<h3 id="Topologies"><a href="#Topologies" class="headerlink" title="Topologies"></a>Topologies</h3><p>Topology is a directed graph of spouts and bolts. It corresponds to a storm “Application”. It can have cycle.</p>
+<h2 id="Bolts-Operations"><a href="#Bolts-Operations" class="headerlink" title="Bolts Operations"></a>Bolts Operations</h2><p>Filter: Only those which satisfy a condition can go through.</p>
+<p>Join: Output all pairs of A,B streams which satisfy a condition.</p>
+<p>Apply/Transform: Apply a function on each tuple in input stream and modify it.</p>
+<p>Bolt is parallelizable. Each incoming tuple is assigned to bolts according to some grouping strategy, popular ones are: all grouping (all bolts receive all inputs), shuffle grouping (assign evenly), fields grouping (assign according to field subset)</p>
+<h2 id="Storm-Cluster"><a href="#Storm-Cluster" class="headerlink" title="Storm Cluster"></a>Storm Cluster</h2><p>Master Node: </p>
+<ol>
+<li>runs daemon called <em>Nimbus</em>; </li>
+<li>Distribute code around cluster and assign tasks to machines.</li>
+<li>Monitor failure in cluster</li>
+</ol>
+<p>Worker Node:</p>
+<ol>
+<li>runs daemon called <em>Supervisor</em></li>
+<li>Listen for assigned work</li>
+</ol>
+<p>Zookeeper System:</p>
+<ol>
+<li>Coordinates Nimbus and Supervisor communication</li>
+<li>All state of Supervisor and Nimbus is kept here.</li>
+</ol>
+<h2 id="Tuple-wise-API"><a href="#Tuple-wise-API" class="headerlink" title="Tuple-wise API"></a>Tuple-wise API</h2><p>​    <strong>Emit</strong>(tuple, output): this function emits tuple as output, and provide input as first argument if it will be anchored.</p>
+<p>​    <strong>Ack</strong>(tuple): Acknowledge that you finish processing a tuple</p>
+<p>​    <strong>Fail</strong>: fail the spout tuple at the root of tuple topology if anything wrong (exception from DB, etc.)</p>
+<p>​    If we do not call ack/fail on each tuple, since each tuple costs resources, may lead to memory leak.</p>
+
     
 
     
@@ -391,6 +426,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2021/01/15/graph-processing/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Distributed graph processing
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/15/replication/" id="article-nav-older" class="article-nav-link-wrap">
