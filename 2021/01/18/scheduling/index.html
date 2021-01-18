@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cyanh1ll.github.io">
-  <title>Archives | Yu Wan’s Blog</title>
+  <title>Scheduling in Distributed Computing | Yu Wan’s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Blog for me">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yu Wan’s Blog">
-<meta property="og:url" content="https://cyanh1ll.github.io/archives/index.html">
+  <meta name="description" content="Scheduling is a term mentioned many times in the field of system programming. Here I post some study notes about scheduling approaches used in Distributed Computing system.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scheduling in Distributed Computing">
+<meta property="og:url" content="https://cyanh1ll.github.io/2021/01/18/scheduling/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="Blog for me">
+<meta property="og:description" content="Scheduling is a term mentioned many times in the field of system programming. Here I post some study notes about scheduling approaches used in Distributed Computing system.">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-18T22:15:37.000Z">
+<meta property="article:modified_time" content="2021-01-18T23:34:25.981Z">
 <meta property="article:author" content="Yu Wan">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Study Notes">
+<meta property="article:tag" content="Cloud Computing">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
@@ -225,41 +228,120 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-scheduling" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      Scheduling in Distributed Computing
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2021/01/18/scheduling/" class="archive-article-date">
         <time datetime="2021-01-18T22:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-18</time>
 </a>
 
-        </div>
-    	 
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/18/scheduling/" target="_blank">Scheduling in Distributed Computing</a>
   
-    </h1>
-  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">674字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">4分</span>
+    </span>
+  </span>
+</div>
 
 
-        <div class="article-info info-on-right">
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>Scheduling is a term mentioned many times in the field of system programming. Here I post some study notes about scheduling approaches used in Distributed Computing system.</p>
+<a id="more"></a> 
+
+<h1 id="Basic-Scheduling-Approaches-review"><a href="#Basic-Scheduling-Approaches-review" class="headerlink" title="Basic Scheduling Approaches review"></a>Basic Scheduling Approaches review</h1><h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><p> FIFO, or first in first out, utilizes a queue to store the tasks that are waited to be completed based on the order of arrival.</p>
+<p>Advantages:  Simply priority scheduling using time order, easy to implement.</p>
+<p>Disadvantages: Average completion time may be high due to <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/convoy-effect-operating-systems/">Convoy effect</a> .</p>
+<h3 id="STF"><a href="#STF" class="headerlink" title="STF"></a>STF</h3><p>STF, or shortest task first, maintains a queue to store the task based on the running time of tasks in increasing order. It is a priority scheduling that uses user-provided priority.</p>
+<p>Advantages: Average completion time is the shortest among all approaches.</p>
+<p>Disadvantages: Starvation may occurs, meaning that if task with shorter time keeps coming, some longer time tasks will not be solved.</p>
+<p>FIFO/STF are <strong>preferable</strong> for Batch applications.</p>
+<h3 id="Round-Robin"><a href="#Round-Robin" class="headerlink" title="Round  Robin"></a>Round  Robin</h3><p>Round robin also maintains a queue. It uses a quantum (a unit of time) to run portion of task in queue. It will pre-empty the tasks when a quantum expires and save their state for resuming later.  After pre-empty, a task will be added to end of queue.</p>
+<p>Advantages: Quick responses from system, no starvation.</p>
+<p>Disadvantages: sensitive to the length of quantum</p>
+<h1 id="Hadoop-Scheduling-Approaches"><a href="#Hadoop-Scheduling-Approaches" class="headerlink" title="Hadoop Scheduling Approaches"></a>Hadoop Scheduling Approaches</h1><p>Hadoop has two types of tasks: map, reduce. There are two popular types of schedulers in Hadoop: Capacity Scheduler, Fair Scheduler. </p>
+<h3 id="Hadoop-Capacity-Scheduler"><a href="#Hadoop-Capacity-Scheduler" class="headerlink" title="Hadoop Capacity Scheduler"></a>Hadoop Capacity Scheduler</h3><p>This approach has multiple queues. Each queue guarantees some portion of the cluster capacity. </p>
+<p>For jobs within same queue, <strong>FIFO</strong> typically used. Pre-emption is <strong>not allowed</strong>. Each queue can have limit (lower bound, upper bound) of the portion in cluster that it can guarantee. </p>
+<h3 id="Hadoop-Fair-Scheduler"><a href="#Hadoop-Fair-Scheduler" class="headerlink" title="Hadoop Fair Scheduler"></a>Hadoop Fair Scheduler</h3><p>In this approach, all jobs get equal share of resources. To do this, it divides cluster into pools (typically one per user). Resources are divided equally among pools. Within each pool, any scheduling approach can be used. </p>
+<p>To ensure each pool is not perform too badly when there are lots of pools, there is a lower bound of percentage of cluster that pool is guaranteed. </p>
+<p>When this minimum share is not met in a pool, it will take resources away from other pools by <strong>pre-empty</strong> jobs in other pools. It can do so because task can be restart if it is doing <strong>idempotent work</strong>. To kill, it picks the most-recently-started task to minimize waster work. </p>
+<h1 id="Concerns-in-using-FIFO"><a href="#Concerns-in-using-FIFO" class="headerlink" title="Concerns in using FIFO"></a>Concerns in using FIFO</h1><p>As we know, FIFO may not be optimal in scheduling. However, it turns out that using STF here is also challenging since it is hard to estimate running time of task. My possible solution for this are；</p>
+<ol>
+<li>Within a job: calculate by proportional size of task’s input</li>
+<li>Across jobs: calculate by average of other tasks in that given job(weighted by input size).</li>
+</ol>
+<h1 id="Dominant-resource-fair-scheduling"><a href="#Dominant-resource-fair-scheduling" class="headerlink" title="Dominant-resource fair scheduling"></a>Dominant-resource fair scheduling</h1><p>New concept here! </p>
+<p>In a single machine, resources are mostly processor and related. In previous parts, it’s about memory. But actually both need to be scheduled properly in cloud (a task may have multiple properties to be considered for scheduling. such as CPU, memory).</p>
+<p>In general, it evaluates each task to see which property intensive (dominant resource) it is to schedule . For example，assume a cloud has total of 18 CPUs, 36 GB RAM. </p>
+<p>For job 1, it consumes 2 CPUs, 8 GB RAM. Then $\frac{2}{18}$  &lt; $\frac{8}{36}$ , therefore it is more RAM intensive than CPU-intensive.</p>
+<p>For a given job, DRF ensures that the percentage of its dominant resource type that is gets  cluster-wide, is the same for all jobs. For example,</p>
+<p>Job 1 is RAM intensive with 8/36 percentage. And assume Job 2 consumes 6 CPUs, 2 GB RAM, with 6/18 &gt; 2/36, so it is CPU-intensive. Then, job 1 with $\frac{8}{36}$, job 2 with $\frac{6}{18}$, we make it equal by assigning 3 tasks of job 1,  and 2 tasks of job 2, given that  $3 *\frac{8}{36}$ =  $2 * \frac{6}{18}$ = $\frac{2}{3}$. </p>
+
+    
+
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Yu Wan
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://cyanh1ll.github.io/2021/01/18/scheduling/" title="Scheduling in Distributed Computing" target="_blank">https://cyanh1ll.github.io/2021/01/18/scheduling/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          CYANH1LL
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -275,446 +357,107 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://cyanh1ll.github.io/2021/01/18/scheduling/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/15/graph-processing/" class="archive-article-date">
-        <time datetime="2021-01-16T02:22:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/15/graph-processing/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Distributed graph processing</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/15/graph-processing/" target="_blank">Distributed graph processing</a>
-  
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/15/Stream/" class="archive-article-date">
-        <time datetime="2021-01-15T23:01:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/15/Stream/" target="_blank">Stream Processing in Apache Storm</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/15/replication/" class="archive-article-date">
-        <time datetime="2021-01-15T22:13:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/15/replication/" target="_blank">Replication Control</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/15/Optimistic/" class="archive-article-date">
-        <time datetime="2021-01-15T21:49:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/15/Optimistic/" target="_blank">Optimistic Concurrency Control</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/15/transaction/" class="archive-article-date">
-        <time datetime="2021-01-15T21:14:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/15/transaction/" target="_blank">Transaction in Distributed System</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/15/RPC2/" class="archive-article-date">
-        <time datetime="2021-01-15T20:43:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/15/RPC2/" target="_blank">RPC in Distributed System</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/14/mutual/" class="archive-article-date">
-        <time datetime="2021-01-15T04:10:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/14/mutual/" target="_blank">Mutual Exclusion</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/14/The%20Leader%20Election%20Problem/" class="archive-article-date">
-        <time datetime="2021-01-15T02:42:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/14/The%20Leader%20Election%20Problem/" target="_blank">The Leader Election Problem</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/11/Binary%20Search%20tips/" class="archive-article-date">
-        <time datetime="2021-01-12T02:27:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-11</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/11/Binary%20Search%20tips/" target="_blank">Binary Search Tips</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -755,8 +498,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

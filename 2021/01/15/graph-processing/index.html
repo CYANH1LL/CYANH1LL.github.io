@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cyanh1ll.github.io/2021/01/15/graph-processing/image-20210115210506095.png">
 <meta property="article:published_time" content="2021-01-16T02:22:37.000Z">
-<meta property="article:modified_time" content="2021-01-16T03:18:45.916Z">
+<meta property="article:modified_time" content="2021-01-18T22:14:57.036Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -263,7 +263,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">209字</span>
+      <span class="post-count">290字</span>
     </span>
   </span>
 
@@ -309,6 +309,33 @@
 <p>In execution, it can be described as: </p>
 <p><img src="image-20210115210506095.png" alt="image-20210115210506095"></p>
 <p>In case of failure, each server save the state of their vertices periodically to generate “checkpoint” in permanent storage, so that they can retrieve after recovery. </p>
+<h2 id="Small-World-Network"><a href="#Small-World-Network" class="headerlink" title="Small World Network"></a>Small World Network</h2><p>High cluster coefficient (CC), short path (path length of shortest path). </p>
+<h2 id="Distribution-of-degree"><a href="#Distribution-of-degree" class="headerlink" title="Distribution of degree"></a>Distribution of degree</h2><p>the probability of a given node has k edges can follow different distribution, such as:</p>
+<table>
+<thead>
+<tr>
+<th>Type of Distribution</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Regular graph</td>
+<td>1, since all nodes same degree</td>
+</tr>
+<tr>
+<td>Gaussian graph</td>
+<td>Same as normal distribution</td>
+</tr>
+<tr>
+<td>Exponential graph</td>
+<td>$e^{-k*c}$, k: # of edges, c : constant</td>
+</tr>
+<tr>
+<td>Power Law graph</td>
+<td>$k^{-\alpha}$, k: # of edges, $\alpha$: constant</td>
+</tr>
+</tbody></table>
+<p>A lot of small world networks are power law graphs, but not all. </p>
 
     
 
@@ -419,6 +446,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2021/01/18/scheduling/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Scheduling in Distributed Computing
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/15/Stream/" id="article-nav-older" class="article-nav-link-wrap">
