@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://cyanh1ll.github.io/2021/01/15/RPC2/</loc>
-    
-    <lastmod>2021-01-19</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://cyanh1ll.github.io/2021/01/18/distributed-file-system/</loc>
     
     <lastmod>2021-01-19</lastmod>
@@ -16,14 +9,21 @@
   </url>
   
   <url>
-    <loc>https://cyanh1ll.github.io/2021/01/18/scheduling/</loc>
+    <loc>https://cyanh1ll.github.io/2021/01/15/graph-processing/</loc>
     
-    <lastmod>2021-01-18</lastmod>
+    <lastmod>2021-01-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://cyanh1ll.github.io/2021/01/15/graph-processing/</loc>
+    <loc>https://cyanh1ll.github.io/2021/01/15/RPC2/</loc>
+    
+    <lastmod>2021-01-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://cyanh1ll.github.io/2021/01/18/scheduling/</loc>
     
     <lastmod>2021-01-18</lastmod>
     
