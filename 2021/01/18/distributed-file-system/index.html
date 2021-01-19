@@ -6,25 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://cyanh1ll.github.io">
-  <title>RPC in Distributed System | Yu Wan’s Blog</title>
+  <title>Distributed file system | Yu Wan’s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="RPC is a important abstraction for processes to call functions in other processes. In the context of distributed system, it is heavily used and are crucial.">
+  <meta name="description" content="File concept reviewFile is a higher level of abstraction. In UNIX like system, we can say that everything is a file.  A File contains:  timestamps: creation, read, write, header. File type ownership A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RPC in Distributed System">
-<meta property="og:url" content="https://cyanh1ll.github.io/2021/01/15/RPC2/index.html">
+<meta property="og:title" content="Distributed file system">
+<meta property="og:url" content="https://cyanh1ll.github.io/2021/01/18/distributed-file-system/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="RPC is a important abstraction for processes to call functions in other processes. In the context of distributed system, it is heavily used and are crucial.">
+<meta property="og:description" content="File concept reviewFile is a higher level of abstraction. In UNIX like system, we can say that everything is a file.  A File contains:  timestamps: creation, read, write, header. File type ownership A">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cyanh1ll.github.io/2021/01/15/RPC2/RPC2.assets/image-20210115151028133.png">
-<meta property="article:published_time" content="2021-01-15T20:43:36.000Z">
-<meta property="article:modified_time" content="2021-01-19T00:32:36.111Z">
+<meta property="og:image" content="https://cyanh1ll.github.io/2021/01/18/distributed-file-system/distributed-file-system.assets/image-20210118182856819.png">
+<meta property="article:published_time" content="2021-01-18T23:54:45.000Z">
+<meta property="article:modified_time" content="2021-01-19T00:31:48.764Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
+<meta property="article:tag" content="System Programming">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cyanh1ll.github.io/2021/01/15/RPC2/RPC2.assets/image-20210115151028133.png">
+<meta name="twitter:image" content="https://cyanh1ll.github.io/2021/01/18/distributed-file-system/distributed-file-system.assets/image-20210118182856819.png">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
   
@@ -230,14 +231,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-RPC2" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-distributed-file-system" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      RPC in Distributed System
+      Distributed file system
     </h1>
   
 
@@ -249,8 +250,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/01/15/RPC2/" class="archive-article-date">
-        <time datetime="2021-01-15T20:43:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
+<a href="/2021/01/18/distributed-file-system/" class="archive-article-date">
+        <time datetime="2021-01-18T23:54:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-18</time>
 </a>
 
   
@@ -263,7 +264,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">199字</span>
+      <span class="post-count">245字</span>
     </span>
   </span>
 
@@ -283,25 +284,30 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>RPC is a important abstraction for processes to call functions in other processes. In the context of distributed system, it is heavily used and are crucial.</p>
-<a id="more"></a>
-
-<p>LPC (local procedure call) often used stack to pass in arguments and data between two functions.</p>
-<p>RPC refers to the condition when two functions (caller and callee) are in two different processes. In this case, the function call come across the process (even machine) boundary.</p>
-<p>In RPC, it is hard to guarantee exactly-once semantics (function run for only once), different occasions may happen:</p>
+    <h1 id="File-concept-review"><a href="#File-concept-review" class="headerlink" title="File concept review"></a>File concept review</h1><p>File is a higher level of abstraction. In UNIX like system, we can say that everything is a file. </p>
+<p>A File contains:</p>
 <ol>
-<li>Request/Reply message being dropped</li>
-<li>Calles process fails before executing the requested function</li>
-<li>Request message may be duplicated. etc.</li>
+<li>timestamps: creation, read, write, header.</li>
+<li>File type</li>
+<li>ownership</li>
+<li>Access control list: who man access in what mode.</li>
+<li>Reference count: number of directories containing this file. When 0, delete this file.</li>
 </ol>
-<p>To deal with such occasion, re-execute/re-transmit may be implemented, which correspond to RPC semantics of at-least-once/at-most-once.</p>
-<p>In re-execute strategy, <strong>idempotent operation</strong> (operation can be repeat without side effect, such as x = 1,but not x = x + 1) can be used.</p>
-<p>RPC sample implementation:</p>
-<p><img src="RPC2.assets/image-20210115151028133.png" alt="image-20210115151028133"></p>
-<p>Client stub: manage function signature and allow code reuse for LPC and RPC.</p>
-<p>Communication Module: In charge of requesting and receiving reply.</p>
-<p>Dispatcher: select which server to respond to request.</p>
-<p>Server stub: calls callee() and send back reply.</p>
+<p>Like I said, everything is a file. So directory is just a special case of file, too. It is a file containing the meta-data about files in that directory and pointers(on disk) to those files. </p>
+<p>We open and close a file with file descriptors with mode (<strong>r</strong> read, w <strong>write</strong>, x <strong>executable</strong>).</p>
+<h1 id="Distributed-file-system"><a href="#Distributed-file-system" class="headerlink" title="Distributed file system"></a>Distributed file system</h1><p>Similar to other concepts, distributed file system should also ensures:</p>
+<ol>
+<li>Transparency: clients access file as if it were accessing local files.</li>
+<li>Support concurrent clients: multiple clients can read/write the file concurrently.</li>
+<li>Replication: fault-tolerance, not lose file when one serve is down. It also has to ensure <strong>one-copy semantics</strong>, which means when a file is replicate. there is no difference from the file having exactly 1 replica for clients.</li>
+</ol>
+<p>It is also important to ensure everyone has the proper right to access files, when involves <strong>authentication</strong>. Two ways to do this:</p>
+<ol>
+<li>Access Control list: list of allowed users and their modes, per file</li>
+<li>Capability Lists: list of allowed files and their mode, per user.</li>
+</ol>
+<h1 id="Analysis-of-two-popular-Distributed-file-system-NFS-amp-AFS"><a href="#Analysis-of-two-popular-Distributed-file-system-NFS-amp-AFS" class="headerlink" title="Analysis of  two popular Distributed file system: NFS &amp; AFS"></a>Analysis of  two popular Distributed file system: NFS &amp; AFS</h1><h3 id="Network-File-System-NFS"><a href="#Network-File-System-NFS" class="headerlink" title="Network File System (NFS)"></a>Network File System (NFS)</h3><p>A general structure of NFS is:</p>
+<p><img src="distributed-file-system.assets/image-20210118182856819.png"></p>
 
     
 
@@ -316,7 +322,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://cyanh1ll.github.io/2021/01/15/RPC2/" title="RPC in Distributed System" target="_blank">https://cyanh1ll.github.io/2021/01/15/RPC2/</a>
+          <a href="https://cyanh1ll.github.io/2021/01/18/distributed-file-system/" title="Distributed file system" target="_blank">https://cyanh1ll.github.io/2021/01/18/distributed-file-system/</a>
         </li>
         
         <li>
@@ -343,6 +349,10 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">System Programming</a>
         		</li>
       		
 		</ul>
@@ -398,7 +408,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://cyanh1ll.github.io/2021/01/15/RPC2/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://cyanh1ll.github.io/2021/01/18/distributed-file-system/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -413,18 +423,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/01/15/transaction/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Transaction in Distributed System
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/14/mutual/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Mutual Exclusion</div>
+    <a href="/2021/01/18/scheduling/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Scheduling in Distributed Computing</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -232,6 +232,123 @@
             
 
   
+    <article id="post-distributed-file-system" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/18/distributed-file-system/" target="_blank">Distributed file system</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/18/distributed-file-system/" class="archive-article-date">
+        <time datetime="2021-01-18T23:54:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="File-concept-review"><a href="#File-concept-review" class="headerlink" title="File concept review"></a>File concept review</h1><p>File is a higher level of abstraction. In UNIX like system, we can say that everything is a file. </p>
+<p>A File contains:</p>
+<ol>
+<li>timestamps: creation, read, write, header.</li>
+<li>File type</li>
+<li>ownership</li>
+<li>Access control list: who man access in what mode.</li>
+<li>Reference count: number of directories containing this file. When 0, delete this file.</li>
+</ol>
+<p>Like I said, everything is a file. So directory is just a special case of file, too. It is a file containing the meta-data about files in that directory and pointers(on disk) to those files. </p>
+<p>We open and close a file with file descriptors with mode (<strong>r</strong> read, w <strong>write</strong>, x <strong>executable</strong>).</p>
+<h1 id="Distributed-file-system"><a href="#Distributed-file-system" class="headerlink" title="Distributed file system"></a>Distributed file system</h1><p>Similar to other concepts, distributed file system should also ensures:</p>
+<ol>
+<li>Transparency: clients access file as if it were accessing local files.</li>
+<li>Support concurrent clients: multiple clients can read/write the file concurrently.</li>
+<li>Replication: fault-tolerance, not lose file when one serve is down. It also has to ensure <strong>one-copy semantics</strong>, which means when a file is replicate. there is no difference from the file having exactly 1 replica for clients.</li>
+</ol>
+<p>It is also important to ensure everyone has the proper right to access files, when involves <strong>authentication</strong>. Two ways to do this:</p>
+<ol>
+<li>Access Control list: list of allowed users and their modes, per file</li>
+<li>Capability Lists: list of allowed files and their mode, per user.</li>
+</ol>
+<h1 id="Analysis-of-two-popular-Distributed-file-system-NFS-amp-AFS"><a href="#Analysis-of-two-popular-Distributed-file-system-NFS-amp-AFS" class="headerlink" title="Analysis of  two popular Distributed file system: NFS &amp; AFS"></a>Analysis of  two popular Distributed file system: NFS &amp; AFS</h1><h3 id="Network-File-System-NFS"><a href="#Network-File-System-NFS" class="headerlink" title="Network File System (NFS)"></a>Network File System (NFS)</h3><p>A general structure of NFS is:</p>
+<p><img src="distributed-file-system.assets/image-20210118182856819.png"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Cloud Computing</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">System Programming</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/18/distributed-file-system/">Expand >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-scheduling" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1038,98 +1155,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/01/14/The%20Leader%20Election%20Problem/">Expand >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Binary Search tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/11/Binary%20Search%20tips/" target="_blank">Binary Search Tips</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/11/Binary%20Search%20tips/" class="archive-article-date">
-        <time datetime="2021-01-12T02:27:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>Binary Search is one of the most common techniques being used in scenarios of searching. It has many types of variants and I would like to discuss some of it and why the edge cases are designed like this.</p>
-    
-    <a class="article-more-a" href="/2021/01/11/Binary%20Search%20tips/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Study Notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/11/Binary%20Search%20tips/">Expand >></a>
     </p>
     
 
