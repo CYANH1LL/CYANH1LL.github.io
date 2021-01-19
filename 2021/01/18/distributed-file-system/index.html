@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cyanh1ll.github.io/images/distributed-file-system/image-20210118182856819.png">
 <meta property="article:published_time" content="2021-01-18T23:54:45.000Z">
-<meta property="article:modified_time" content="2021-01-19T02:58:48.803Z">
+<meta property="article:modified_time" content="2021-01-19T03:23:36.791Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -264,7 +264,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">286字</span>
+      <span class="post-count">480字</span>
     </span>
   </span>
 
@@ -273,7 +273,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -309,9 +309,20 @@
 <li>Access Control list: list of allowed users and their modes, per file</li>
 <li>Capability Lists: list of allowed files and their mode, per user.</li>
 </ol>
-<h1 id="Analysis-of-two-popular-Distributed-file-system-NFS-amp-AFS"><a href="#Analysis-of-two-popular-Distributed-file-system-NFS-amp-AFS" class="headerlink" title="Analysis of  two popular Distributed file system: NFS &amp; AFS"></a>Analysis of  two popular Distributed file system: NFS &amp; AFS</h1><h3 id="Network-File-System-NFS"><a href="#Network-File-System-NFS" class="headerlink" title="Network File System (NFS)"></a>Network File System (NFS)</h3><p>A general structure of NFS is:</p>
+<h1 id="Navigation-of-two-popular-Distributed-file-systems-NFS-amp-AFS"><a href="#Navigation-of-two-popular-Distributed-file-systems-NFS-amp-AFS" class="headerlink" title="Navigation of  two popular Distributed file systems: NFS &amp; AFS"></a>Navigation of  two popular Distributed file systems: NFS &amp; AFS</h1><h2 id="Network-File-System-NFS"><a href="#Network-File-System-NFS" class="headerlink" title="Network File System (NFS)"></a>Network File System (NFS)</h2><p>A general structure of NFS is:</p>
 <p><img src="/images/distributed-file-system/image-20210118182856819.png" alt="image-20210118182856819"></p>
-<p>For a client, if a file exist on local system, use unix local system, if not, use NFS client system to navigate virtual file system on server, which will search on its own local disk. </p>
+<h3 id="Client"><a href="#Client" class="headerlink" title="Client:"></a>Client:</h3><p>For a client, if a file exist on local system, use UNIX local system, if not, use NFS client system to navigate virtual file system on server, which will search on its own local disk. </p>
+<p>It contains data structure of <strong>v-node</strong>, which is similar to i-node in UNIX. If target file is local, v-node points to local disk i-node. If not, v-node contains address of remote NFS server.</p>
+<p><strong>Client Caching</strong>: store some of the recently-accessed blocks in memory, have to ensure local cache copy is consistent with server copy by <u>checking modified time</u> or setting up <u>fresh interval</u>.</p>
+<h3 id="Server"><a href="#Server" class="headerlink" title="Server:"></a>Server:</h3><p><strong>Server caching:</strong> store some of the recently-accessed blocks in memory, because most of program written by human have locality of access, beneficial for read.</p>
+<p><strong>Delayed write</strong>: write in memory and flush to disk periodically, this is fast but inconsistent.</p>
+<h2 id="Andrew-File-System-AFS"><a href="#Andrew-File-System-AFS" class="headerlink" title="Andrew File System (AFS)"></a>Andrew File System (AFS)</h2><p>Design principles:</p>
+<ol>
+<li>whole file serving (not in blocks)</li>
+<li>whole file caching (permanent cache, survives reboots)</li>
+</ol>
+<p>Clients system is known as <em>Venus service</em>, server system is known as <em>Vice</em>.</p>
+<p>Since for read and write, AFS is operating on a whole file level, read/write are optimistic. When sending a file from vice to venus, it is accompanied with a <em>callback promise</em>, which promise that if another client modifies then closes the file. In this way, it prevents concurrent modifications/writes.</p>
 
     
 
