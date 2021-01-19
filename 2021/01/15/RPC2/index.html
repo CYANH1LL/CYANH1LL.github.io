@@ -17,14 +17,14 @@
 <meta property="og:site_name" content="Yu Wan’s Blog">
 <meta property="og:description" content="RPC is a important abstraction for processes to call functions in other processes. In the context of distributed system, it is heavily used and are crucial.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cyanh1ll.github.io/2021/01/15/RPC2/RPC2/image-20210115151028133-1611021226269.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/RPC2/image-20210115151028133-1611021226269.png">
 <meta property="article:published_time" content="2021-01-15T20:43:36.000Z">
-<meta property="article:modified_time" content="2021-01-19T01:59:41.131Z">
+<meta property="article:modified_time" content="2021-01-19T02:59:04.808Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cyanh1ll.github.io/2021/01/15/RPC2/RPC2/image-20210115151028133-1611021226269.png">
+<meta name="twitter:image" content="https://cyanh1ll.github.io/images/RPC2/image-20210115151028133-1611021226269.png">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
   
@@ -297,7 +297,7 @@
 <p>To deal with such occasion, re-execute/re-transmit may be implemented, which correspond to RPC semantics of at-least-once/at-most-once.</p>
 <p>In re-execute strategy, <strong>idempotent operation</strong> (operation can be repeat without side effect, such as x = 1,but not x = x + 1) can be used.</p>
 <p>RPC sample implementation:</p>
-<p><img src="RPC2/image-20210115151028133-1611021226269.png" alt="image-20210115151028133-1611021226269"></p>
+<p><img src="/images/RPC2/image-20210115151028133-1611021226269.png" alt="image-20210115151028133-1611021226269"></p>
 <p>Client stub: manage function signature and allow code reuse for LPC and RPC.</p>
 <p>Communication Module: In charge of requesting and receiving reply.</p>
 <p>Dispatcher: select which server to respond to request.</p>

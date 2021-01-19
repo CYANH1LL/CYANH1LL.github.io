@@ -10,22 +10,22 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="File concept reviewFile is a higher level of abstraction. In UNIX like system, we can say that everything is a file.  A File contains:  timestamps: creation, read, write, header. File type ownership A">
+  <meta name="description" content="System programming concepts in distributed systems">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Distributed file system">
 <meta property="og:url" content="https://cyanh1ll.github.io/2021/01/18/distributed-file-system/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="File concept reviewFile is a higher level of abstraction. In UNIX like system, we can say that everything is a file.  A File contains:  timestamps: creation, read, write, header. File type ownership A">
+<meta property="og:description" content="System programming concepts in distributed systems">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cyanh1ll.github.io/2021/01/18/distributed-file-system/distributed-file-system/image-20210118182856819.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/distributed-file-system/image-20210118182856819.png">
 <meta property="article:published_time" content="2021-01-18T23:54:45.000Z">
-<meta property="article:modified_time" content="2021-01-19T02:16:11.437Z">
+<meta property="article:modified_time" content="2021-01-19T02:58:48.803Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
 <meta property="article:tag" content="System Programming">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cyanh1ll.github.io/2021/01/18/distributed-file-system/distributed-file-system/image-20210118182856819.png">
+<meta name="twitter:image" content="https://cyanh1ll.github.io/images/distributed-file-system/image-20210118182856819.png">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
   
@@ -264,7 +264,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">280字</span>
+      <span class="post-count">286字</span>
     </span>
   </span>
 
@@ -284,7 +284,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="File-concept-review"><a href="#File-concept-review" class="headerlink" title="File concept review"></a>File concept review</h1><p>File is a higher level of abstraction. In UNIX like system, we can say that everything is a file. </p>
+    <p>System programming concepts in distributed systems</p>
+<a id="more"></a>
+
+<h1 id="File-concept-review"><a href="#File-concept-review" class="headerlink" title="File concept review"></a>File concept review</h1><p>File is a higher level of abstraction. In UNIX like system, we can say that everything is a file. </p>
 <p>A File contains:</p>
 <ol>
 <li>timestamps: creation, read, write, header.</li>
@@ -307,7 +310,7 @@
 <li>Capability Lists: list of allowed files and their mode, per user.</li>
 </ol>
 <h1 id="Analysis-of-two-popular-Distributed-file-system-NFS-amp-AFS"><a href="#Analysis-of-two-popular-Distributed-file-system-NFS-amp-AFS" class="headerlink" title="Analysis of  two popular Distributed file system: NFS &amp; AFS"></a>Analysis of  two popular Distributed file system: NFS &amp; AFS</h1><h3 id="Network-File-System-NFS"><a href="#Network-File-System-NFS" class="headerlink" title="Network File System (NFS)"></a>Network File System (NFS)</h3><p>A general structure of NFS is:</p>
-<p><img src="distributed-file-system/image-20210118182856819.png" alt="image-20210118182856819"></p>
+<p><img src="/images/distributed-file-system/image-20210118182856819.png" alt="image-20210118182856819"></p>
 <p>For a client, if a file exist on local system, use unix local system, if not, use NFS client system to navigate virtual file system on server, which will search on its own local disk. </p>
 
     
