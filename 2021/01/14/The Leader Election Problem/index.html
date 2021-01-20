@@ -18,7 +18,7 @@
 <meta property="og:description" content="The Leader Election Problem is classical and has been useful in many variants of systems, including cloud computing systems.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-15T02:42:10.000Z">
-<meta property="article:modified_time" content="2021-01-15T19:19:16.697Z">
+<meta property="article:modified_time" content="2021-01-19T22:33:54.145Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">654字</span>
+      <span class="post-count">687字</span>
     </span>
   </span>
 
@@ -301,7 +301,7 @@
 <p>Some solutions for this condition:</p>
 <p><strong>1.</strong> the would-be leader will be monitored by its neighbor, and its neighbor should call for a new election when timeout waiting for elected. This solution can fail when the neighbor is also failed (and the neighbor of neighbor also fails).</p>
 <p><strong>2.</strong> Each process after receiving the “Election” message should detect failure on would-be leader using its local failure detector.</p>
-<h2 id="Paxos-like-solution-in-Google-Chubby"><a href="#Paxos-like-solution-in-Google-Chubby" class="headerlink" title="Paxos-like solution in Google Chubby"></a>Paxos-like solution in Google Chubby</h2><p>During each election, each process votes for only once. And any potential should reach the quorum (majority) to get elected. After election finishes, other servers will not run election again for a “while”</p>
+<h2 id="Paxos-like-solution-in-Google-Chubby"><a href="#Paxos-like-solution-in-Google-Chubby" class="headerlink" title="Paxos-like solution in Google Chubby"></a>Paxos-like solution in Google Chubby</h2><p>During each election, each process votes for only once. And any potential should reach the quorum (majority) to get elected. Once a leader is elected, other processes promise to consider it leader for a minimum time, after which, if the leader remains alive, it can renew the master lease and thus remain leader (After election finishes, other servers will not run election again for a “while”) . </p>
 <h2 id="Paxos-like-solution-in-Zookeeper"><a href="#Paxos-like-solution-in-Zookeeper" class="headerlink" title="Paxos-like solution in Zookeeper"></a>Paxos-like solution in Zookeeper</h2><p>Each server creates a new sequence number for itself. The leader will be the server with highest number. For failure, each server monitors its next higher number process. </p>
 <p>If its successor is the leader and it has failed, it become the new leader, else waiting for time out to check again.</p>
 <p>It has two phase: </p>

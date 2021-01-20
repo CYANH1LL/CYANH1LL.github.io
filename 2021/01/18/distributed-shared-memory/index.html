@@ -18,7 +18,7 @@
 <meta property="og:description" content="Shared Memory in Distributed System">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-19T03:24:00.000Z">
-<meta property="article:modified_time" content="2021-01-19T03:55:09.040Z">
+<meta property="article:modified_time" content="2021-01-20T01:33:13.687Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -262,7 +262,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">215字</span>
+      <span class="post-count">225字</span>
     </span>
   </span>
 
@@ -297,7 +297,13 @@
 <p>Multiple processes are allowed to have page in write state. On write to a page, a multicast of the value of modification would be sent to all other holder of that page. Therefore, other holders can prevent dirty read and continue reading and writing page.</p>
 </li>
 </ol>
-<p>Update approach is preferable to invalidate approach: lots of sharing among processes, writes are small, or page sizes is large. Other than that, Invalidate approach is a preferred option.</p>
+<p>Update approach is preferable to invalidate approach: </p>
+<ol>
+<li>lots of sharing among processes (or lots of writes concurrently)</li>
+<li>writes are small</li>
+<li>Most operations on pages are reads</li>
+<li>page sizes is large. Other than that, Invalidate approach is a preferred option.</li>
+</ol>
 
     
 
@@ -412,6 +418,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2021/01/19/distributed-system-security/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Distributed system security
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/18/distributed-file-system/" id="article-nav-older" class="article-nav-link-wrap">

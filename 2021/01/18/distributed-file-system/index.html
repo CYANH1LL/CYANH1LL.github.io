@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cyanh1ll.github.io/images/distributed-file-system/image-20210118182856819.png">
 <meta property="article:published_time" content="2021-01-18T23:54:45.000Z">
-<meta property="article:modified_time" content="2021-01-19T03:23:36.791Z">
+<meta property="article:modified_time" content="2021-01-20T01:39:51.067Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -264,7 +264,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">480字</span>
+      <span class="post-count">610字</span>
     </span>
   </span>
 
@@ -313,13 +313,21 @@
 <p><img src="/images/distributed-file-system/image-20210118182856819.png" alt="image-20210118182856819"></p>
 <h3 id="Client"><a href="#Client" class="headerlink" title="Client:"></a>Client:</h3><p>For a client, if a file exist on local system, use UNIX local system, if not, use NFS client system to navigate virtual file system on server, which will search on its own local disk. </p>
 <p>It contains data structure of <strong>v-node</strong>, which is similar to i-node in UNIX. If target file is local, v-node points to local disk i-node. If not, v-node contains address of remote NFS server.</p>
-<p><strong>Client Caching</strong>: store some of the recently-accessed blocks in memory, have to ensure local cache copy is consistent with server copy by <u>checking modified time</u> or setting up <u>fresh interval</u>.</p>
+<p><strong>Client Caching</strong>: store some of the recently-accessed blocks in memory, have to ensure local cache copy is consistent with server copy by <u>checking modified time</u> and setting up <u>freshness interval</u>. </p>
+<p>Example: If client sets up freshness interval = 4s, a client finds that a data block it is storing has two timestamps: last validated timestamp=12345 s, and last modified timestamp=12340 s. At the same time, the server’s last modified timestamp=12346 s. If the client clock currently reads 12350 s, since 12345 + 4 &lt; 12350, so data block is no more fresh and need to be validated. And since 12340 $\neq$ 12346, client fetch the block from the server as the server has latest copy.</p>
 <h3 id="Server"><a href="#Server" class="headerlink" title="Server:"></a>Server:</h3><p><strong>Server caching:</strong> store some of the recently-accessed blocks in memory, because most of program written by human have locality of access, beneficial for read.</p>
 <p><strong>Delayed write</strong>: write in memory and flush to disk periodically, this is fast but inconsistent.</p>
 <h2 id="Andrew-File-System-AFS"><a href="#Andrew-File-System-AFS" class="headerlink" title="Andrew File System (AFS)"></a>Andrew File System (AFS)</h2><p>Design principles:</p>
 <ol>
 <li>whole file serving (not in blocks)</li>
-<li>whole file caching (permanent cache, survives reboots)</li>
+<li>whole file caching (permanent cache, survives reboots), a type of delayed write.</li>
+</ol>
+<p>Motivation (validated assumption) for the principles:</p>
+<ol>
+<li>Most file accesses are by a single user</li>
+<li>Most files are small</li>
+<li>File reads much more often than writes, and typically sequential.</li>
+<li>Most of the time, cache is large enough to support</li>
 </ol>
 <p>Clients system is known as <em>Venus service</em>, server system is known as <em>Vice</em>.</p>
 <p>Since for read and write, AFS is operating on a whole file level, read/write are optimistic. When sending a file from vice to venus, it is accompanied with a <em>callback promise</em>, which promise that if another client modifies then closes the file. In this way, it prevents concurrent modifications/writes.</p>
