@@ -17,12 +17,21 @@
 <meta property="og:site_name" content="Yu Wan’s Blog">
 <meta property="og:description" content="For mutual Exclusion in Distributed System, we need to guarantee 3 propterties:  Safety (essential): Nothing bad happens Liveness (essential): Every request is granted eventually Ordering (desirable):">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195800992.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195814715.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195825603.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195836273.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195844454.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195853374.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195902945.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195911569.png">
 <meta property="article:published_time" content="2021-01-15T04:10:12.000Z">
-<meta property="article:modified_time" content="2021-01-15T20:42:52.358Z">
+<meta property="article:modified_time" content="2021-01-20T02:11:53.732Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cyanh1ll.github.io/images/mutual/image-20210119195800992.png">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
   
@@ -261,7 +270,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">598字</span>
+      <span class="post-count">638字</span>
     </span>
   </span>
 
@@ -311,17 +320,41 @@
 <h2 id="Ricart-Agrawala’s-Algorithm"><a href="#Ricart-Agrawala’s-Algorithm" class="headerlink" title="Ricart-Agrawala’s Algorithm"></a>Ricart-Agrawala’s Algorithm</h2><p>Each process has its own “state” indicating its status, including: “Wanted”, “Held”, “Released”.</p>
 <p>When one process $P_i$ wants to enter critical section, it:</p>
 <ol>
-<li><strong>For $P_i$</strong>, set state = “wanted”, then multicast “Request” in form of &lt;$T_i, P_i$&gt; to all processes, where $T_i$ is lamport timestamp, $P_i$ is process id. </li>
+<li><strong>For $P_i$</strong>, set state = “wanted”, then multicast “Request” in form of &lt;$T_i, P_i$&gt; to all processes, where $T_i$ is lamport timestamp, $P_i$ is process id used to break tie. </li>
 <li>wait until all processes send back “Reply” message, then change state = “Held” to enter the critical section</li>
 <li><strong>For those who received &lt;$T_i, P_i$&gt;</strong>, if its state = “Held” or it is also in “wanted” and its timestamp is smaller/earlier than the request, it put the request into local queue. Else, it send “Reply” back to $P_i$ .</li>
 </ol>
-<p>When one process $P_i$ wants to exit critical section:</p>
-<ol>
-<li>It changes state to “Released” and send “Reply” to all queued requests.</li>
-</ol>
-<p>For this algorithm, Safety is guaranteed, ordering is guaranteed in the order of lamport timestamp, and the worst case is for a process $P_i$ to wait for N - 1 processes to send Reply back. </p>
+<p>When one process $P_i$ wants to exit critical section, it changes state to “Released” and send “Reply” to all queued requests.</p>
+<p><strong>Example</strong>:</p>
+<p><strong>Current no other request</strong>: </p>
+<p>N32 sends request</p>
+<img src="/images/mutual/image-20210119195800992.png" alt="image-20210119195800992" style="zoom:50%;" />
+
+<p>All other replys</p>
+<img src="/images/mutual/image-20210119195814715.png" alt="image-20210119195814715" style="zoom:50%;" />
+
+<p><strong>Concurrent requests occur</strong>: N12 and N80 wanted to access</p>
+<img src="/images/mutual/image-20210119195825603.png" alt="image-20210119195825603" style="zoom:50%;" />
+
+
+
+<img src="/images/mutual/image-20210119195836273.png" alt="image-20210119195836273" style="zoom:50%;" />
+
+<p>Enqueue the requests, wait for N32 to finish access</p>
+<img src="/images/mutual/image-20210119195844454.png" alt="image-20210119195844454" style="zoom:50%;" />
+
+<img src="/images/mutual/image-20210119195853374.png" alt="image-20210119195853374" style="zoom:50%;" />
+
+<img src="/images/mutual/image-20210119195902945.png" alt="image-20210119195902945" style="zoom:50%;" />
+
+<p>N32 finish, N80 starts access</p>
+<img src="/images/mutual/image-20210119195911569.png" alt="image-20210119195911569" style="zoom:50%;" />
+
+
+
+<p>For this algorithm, Safety and liveness is guaranteed, ordering is guaranteed in the order of lamport timestamp, and the worst case is for a process $P_i$ to wait for N - 1 processes to send Reply back. </p>
 <h2 id="Maekawa’s-Algorithm"><a href="#Maekawa’s-Algorithm" class="headerlink" title="Maekawa’s Algorithm"></a>Maekawa’s Algorithm</h2><p>Each process is in a voting set, and each process belongs to its own voting set. </p>
-<p>The intersection of any two voting sets must be non-empty, kinda like quorums.</p>
+<p>The <strong>intersection</strong> of any two voting sets must be <strong>non-empty</strong>, kinda like quorums.</p>
 <p>In terms of size, each process belongs to M other sets, each sets is of size K, and K = M = $\sqrt{N}$ is proved to be best.</p>
 <p>One approach is to put N processes into $\sqrt{N}$ * $\sqrt{N}$ matrix, for each process p, v = i + j, where i is row number of p and j is column number.</p>
 <p>Compared to Ricart-Agrawala’s Algorithm, it only requires processes in group to send reply (vote) back. Each process maintains a local variable called “votes”.</p>

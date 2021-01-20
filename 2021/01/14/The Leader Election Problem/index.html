@@ -17,12 +17,21 @@
 <meta property="og:site_name" content="Yu Wan’s Blog">
 <meta property="og:description" content="The Leader Election Problem is classical and has been useful in many variants of systems, including cloud computing systems.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194700073.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194719628.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194732922.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194739648.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194746667.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194753856.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194759142.png">
+<meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194805323.png">
 <meta property="article:published_time" content="2021-01-15T02:42:10.000Z">
-<meta property="article:modified_time" content="2021-01-19T22:33:54.145Z">
+<meta property="article:modified_time" content="2021-01-20T01:55:39.888Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194700073.png">
   
     <link rel="alternative" href="/atom.xml" title="Yu Wan’s Blog" type="application/atom+xml">
   
@@ -261,7 +270,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">687字</span>
+      <span class="post-count">759字</span>
     </span>
   </span>
 
@@ -319,7 +328,30 @@
 <p>When leader fails, if one find itself to be new leader(highest id), it sends out <strong>“Coordinator”</strong> message to others. If it is not, initiates an election by sending <strong>“Election”</strong> only to those greater than itself. After initiate, if it receives no answer （OK message）within timeout, send <strong>“Coordinator”</strong> message again, else it wait for “Coordinator” message. It no “Coordinator”  received within timeout, start new round.</p>
 <p>In this approach, we eventually come up with a leader.</p>
 <p><strong>Time Complexity:</strong> O(N^2) =  N -1 + N - 2+ … +2 + 1</p>
+<p><strong>Example</strong>:</p>
+<p>failure detected by N6</p>
+<img src="/images/The%20Leader%20Election%20Problem/image-20210119194700073.png" alt="image-20210119194700073" style="zoom:50%;" />
 
+<p>Send “Election” only to higher ones</p>
+<img src="/images/The%20Leader%20Election%20Problem/image-20210119194719628.png" alt="image-20210119194719628" style="zoom:50%;" />
+
+<p>If servers receive “Election”, reply with “OK” and send “Election” to higher ones</p>
+<img src="/images/The%20Leader%20Election%20Problem/image-20210119194732922.png" alt="image-20210119194732922" style="zoom:50%;" />
+
+<p>Message touchs the current highest one</p>
+<img src="/images/The%20Leader%20Election%20Problem/image-20210119194739648.png" alt="image-20210119194739648" style="zoom:50%;" />
+
+<p>if it receives no answer （OK message）within timeout, send <strong>“Coordinator”</strong> message again.</p>
+<img src="/images/The%20Leader%20Election%20Problem/image-20210119194746667.png" alt="image-20210119194746667" style="zoom:50%;" />
+
+<p><strong>If failures occur during Election Run</strong>: in this case, N32 fails</p>
+<img src="/images/The%20Leader%20Election%20Problem/image-20210119194753856.png" alt="image-20210119194753856" style="zoom:50%;" />
+
+<p>Since N6 does not receive OK from N32, start new round.</p>
+<img src="/images/The%20Leader%20Election%20Problem/image-20210119194759142.png" alt="image-20210119194759142" style="zoom:50%;" />
+
+<p>If N12 also fails, start new round.</p>
+<img src="/images/The%20Leader%20Election%20Problem/image-20210119194805323.png" alt="image-20210119194805323" style="zoom:50%;" />
     
 
     
