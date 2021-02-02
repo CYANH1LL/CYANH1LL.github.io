@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Shared Memory in Distributed System">
+  <meta name="description" content="Shared Memory in Distributed System  It is similar to file system in a way that different processes are sharing pages instead of sending&#x2F;receiving messages. It means to design a memory that allows pro">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Distributed shared memory">
 <meta property="og:url" content="https://cyanh1ll.github.io/2021/01/18/distributed-shared-memory/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="Shared Memory in Distributed System">
+<meta property="og:description" content="Shared Memory in Distributed System  It is similar to file system in a way that different processes are sharing pages instead of sending&#x2F;receiving messages. It means to design a memory that allows pro">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-19T03:24:00.000Z">
-<meta property="article:modified_time" content="2021-01-20T01:33:13.687Z">
+<meta property="article:modified_time" content="2021-02-02T03:46:38.792Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -283,11 +283,11 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>Shared Memory in Distributed System </p>
-<a id="more"></a>
-
 <p>It is similar to file system in a way that different processes are sharing pages instead of sending/receiving messages. It means to design a memory that allows processes to use same code as if they were all running over the same operating system/machine.</p>
 <p>Page has two state: read, write</p>
 <p>For concurrent read of pages. it is OK that many processes have their own copy of page in memory to concurrently access. </p>
+<a id="more"></a>
+
 <p>However, for concurrent modify/write of pages, it causes inconsistency between processes. Therefore, different approaches are used here.</p>
 <ol>
 <li><p><strong>Invalidate approach:</strong></p>

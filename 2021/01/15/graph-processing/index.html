@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cyanh1ll.github.io/images/graph-processing/image-20210115210506095.png">
 <meta property="article:published_time" content="2021-01-16T02:22:37.000Z">
-<meta property="article:modified_time" content="2021-01-19T02:58:24.372Z">
+<meta property="article:modified_time" content="2021-02-02T03:47:13.421Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -284,9 +284,9 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>In the trend of social media, graph is frequently mentioned as a common description of social network/friend circle/work connection in real-life. But graph can be really large and hard to store in one server. Therefore, distributed clusters/systems are here to help.</p>
+<h2 id="Typical-graph-processing"><a href="#Typical-graph-processing" class="headerlink" title="Typical graph processing"></a>Typical graph processing</h2><p>Each node is assigned with a value, in each iteration, it gather values from its immediate neighbors and does some computation using its own value and neighbor value to generate new value. After that, update its new value and send it out to neighbors.</p>
 <a id="more"></a>
 
-<h2 id="Typical-graph-processing"><a href="#Typical-graph-processing" class="headerlink" title="Typical graph processing"></a>Typical graph processing</h2><p>Each node is assigned with a value, in each iteration, it gather values from its immediate neighbors and does some computation using its own value and neighbor value to generate new value. After that, update its new value and send it out to neighbors.</p>
 <h2 id="Distributed-graph-processing"><a href="#Distributed-graph-processing" class="headerlink" title="Distributed graph processing"></a>Distributed graph processing</h2><p>Assign each vertex to one server. Then, each server thus gets a subset of vertices since a server might get several assigned vertices.</p>
 <p>Then, they do typical Gather-Apply-Scatter for all assigned vertices.</p>
 <p>For assigning process, it can based on different options, such as hash-based or locality-based (assign related neighbor to the same server).</p>

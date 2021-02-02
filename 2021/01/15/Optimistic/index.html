@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Concurrency Control in distributed system including pessimistic control (such as read-write lock) and optimistic control. Here we discuss the optimistic approaches:">
+  <meta name="description" content="Concurrency Control in distributed system including pessimistic control (such as read-write lock) and optimistic control. Here we discuss the optimistic approaches: Basic approach: Check for serializa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Optimistic Concurrency Control">
 <meta property="og:url" content="https://cyanh1ll.github.io/2021/01/15/Optimistic/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="Concurrency Control in distributed system including pessimistic control (such as read-write lock) and optimistic control. Here we discuss the optimistic approaches:">
+<meta property="og:description" content="Concurrency Control in distributed system including pessimistic control (such as read-write lock) and optimistic control. Here we discuss the optimistic approaches: Basic approach: Check for serializa">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-15T21:49:48.000Z">
-<meta property="article:modified_time" content="2021-01-15T23:05:41.111Z">
+<meta property="article:modified_time" content="2021-02-02T03:47:27.170Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -282,8 +282,6 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>Concurrency Control in distributed system including pessimistic control (such as read-write lock) and optimistic control. Here we discuss the optimistic approaches:</p>
-<a id="more"></a>
-
 <h3 id="Basic-approach"><a href="#Basic-approach" class="headerlink" title="Basic approach:"></a>Basic approach:</h3><ol>
 <li>Check for serializability at commit.</li>
 <li>If not, abort, and roll back updates it did.</li>
@@ -294,6 +292,8 @@
 <li>“tentative version” has timestamp, sometimes we have timestamp for both read and write.</li>
 <li>On read and write, find the correct version.</li>
 </ol>
+<a id="more"></a>
+
 <h3 id="Vector-Clock-Approach"><a href="#Vector-Clock-Approach" class="headerlink" title="Vector Clock Approach"></a>Vector Clock Approach</h3><p>​    1. For each object, maintain a vector clock that records the timestamp for which have modified it.</p>
 <ol start="2">
 <li>It detect whether new write is strictly newer than current value. If it is, then do the update, if not, create a **sibling value ** which can be solved by user or pre-defined strategy in application.</li>

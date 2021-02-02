@@ -266,9 +266,9 @@
 <p><strong>SaaS (Software as a Service):</strong> Gmail</p>
 <p>Level of available resources need to manage:</p>
 <p><img src="/images/cloud-service-types/image-20210201210958593.png" alt="image-20210201210958593"></p>
-<p><img src="/images/cloud-service-types/image-20210201211314708.png" alt="image-20210201211314708"></p>
-<p>In terms of multi-tenancy, PaaS is better suited since users may share the same machine without realizing it, while IaaS may provide each user with his own virtual machine and create a clear separation of resources.</p>
-
+    
+    <a class="article-more-a" href="/2021/02/01/cloud-service-types/#more">more >></a>
+    
     
 
     
@@ -358,6 +358,15 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>Security related topics in distributed systems</p>
+<h2 id="Common-types-of-security-threats"><a href="#Common-types-of-security-threats" class="headerlink" title="Common types of security threats"></a>Common types of security threats</h2><p><strong>Leakage</strong>: Unauthorized access to data or service (Confidentiality)</p>
+<p><strong>Tampering</strong>: Unauthorized modification to data or service (Integrity)</p>
+<p><strong>Vandalism</strong>: Interference with normal service. (Availability)</p>
+<h2 id="Policy-of-security"><a href="#Policy-of-security" class="headerlink" title="Policy of security"></a>Policy of security</h2><p>Confidentiality, Integrity, and Availability together means <strong>CIA properties</strong>, which is security policy (what we want to achieve).</p>
+<h2 id="Common-types-of-attacks"><a href="#Common-types-of-attacks" class="headerlink" title="Common types of attacks"></a>Common types of attacks</h2><p><strong>Eavesdropping</strong>: attacker taps into networks</p>
+<p><strong>Masquerading</strong>: attackers pretend to be someone else</p>
+<p><strong>Message tampering</strong>: attacker modifies messages</p>
+<p><strong>Replay attack</strong>: attacker replay old messages</p>
+<p><strong>Denial of service</strong>: bombard a port</p>
     
     <a class="article-more-a" href="/2021/01/19/distributed-system-security/#more">more >></a>
     
@@ -454,6 +463,9 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>Shared Memory in Distributed System </p>
+<p>It is similar to file system in a way that different processes are sharing pages instead of sending/receiving messages. It means to design a memory that allows processes to use same code as if they were all running over the same operating system/machine.</p>
+<p>Page has two state: read, write</p>
+<p>For concurrent read of pages. it is OK that many processes have their own copy of page in memory to concurrently access. </p>
     
     <a class="article-more-a" href="/2021/01/18/distributed-shared-memory/#more">more >></a>
     
@@ -550,6 +562,17 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>System programming concepts in distributed systems</p>
+<h1 id="File-concept-review"><a href="#File-concept-review" class="headerlink" title="File concept review"></a>File concept review</h1><p>File is a higher level of abstraction. In UNIX like system, we can say that everything is a file. </p>
+<p>A File contains:</p>
+<ol>
+<li>timestamps: creation, read, write, header.</li>
+<li>File type</li>
+<li>ownership</li>
+<li>Access control list: who man access in what mode.</li>
+<li>Reference count: number of directories containing this file. When 0, delete this file.</li>
+</ol>
+<p>Like I said, everything is a file. So directory is just a special case of file, too. It is a file containing the meta-data about files in that directory and pointers(on disk) to those files. </p>
+<p>We open and close a file with file descriptors with mode (<strong>r</strong> read, w <strong>write</strong>, x <strong>executable</strong>).</p>
     
     <a class="article-more-a" href="/2021/01/18/distributed-file-system/#more">more >></a>
     
@@ -646,6 +669,13 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>Scheduling is a term mentioned many times in the field of system programming. Here I post some study notes about scheduling approaches used in Distributed Computing system.</p>
+<h1 id="Basic-Scheduling-Approaches-review"><a href="#Basic-Scheduling-Approaches-review" class="headerlink" title="Basic Scheduling Approaches review"></a>Basic Scheduling Approaches review</h1><h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><p> FIFO, or first in first out, utilizes a queue to store the tasks that are waited to be completed based on the order of arrival.</p>
+<p>Advantages:  Simply priority scheduling using time order, easy to implement.</p>
+<p>Disadvantages: Average completion time may be high due to <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/convoy-effect-operating-systems/">Convoy effect</a> .</p>
+<h3 id="STF"><a href="#STF" class="headerlink" title="STF"></a>STF</h3><p>STF, or shortest task first, maintains a queue to store the task based on the running time of tasks in increasing order. It is a priority scheduling that uses user-provided priority.</p>
+<p>Advantages: Average completion time is the shortest among all approaches.</p>
+<p>Disadvantages: Starvation may occurs, meaning that if task with shorter time keeps coming, some longer time tasks will not be solved.</p>
+<p>FIFO/STF are <strong>preferable</strong> for Batch applications.</p>
     
     <a class="article-more-a" href="/2021/01/18/scheduling/#more">more >></a>
     
@@ -738,6 +768,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>In the trend of social media, graph is frequently mentioned as a common description of social network/friend circle/work connection in real-life. But graph can be really large and hard to store in one server. Therefore, distributed clusters/systems are here to help.</p>
+<h2 id="Typical-graph-processing"><a href="#Typical-graph-processing" class="headerlink" title="Typical graph processing"></a>Typical graph processing</h2><p>Each node is assigned with a value, in each iteration, it gather values from its immediate neighbors and does some computation using its own value and neighbor value to generate new value. After that, update its new value and send it out to neighbors.</p>
     
     <a class="article-more-a" href="/2021/01/15/graph-processing/#more">more >></a>
     
@@ -830,6 +861,11 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>Brought by the trend of social media,  large amounts of data is needed for real-time views.</p>
+<h2 id="Stream-processing"><a href="#Stream-processing" class="headerlink" title="Stream processing"></a>Stream processing</h2><p>Stream processing is used to process large amount of data with low latency and high throughput. Some classical solution such as Mapreduce may not be efficient here since it is essentially batch processing and needs to wait for entire computation of a large dataset to complete before viewing (there is not intermediate result.). </p>
+<p>So I choode one of the most common project from Apache called : “Storm” to investigate its inner mechanism and components. </p>
+<h2 id="Apache-Storm"><a href="#Apache-Storm" class="headerlink" title="Apache Storm"></a>Apache Storm</h2><p>The component of storm stream processing includes entities: Tuples, Streams, Spouts, Bolts, Topologies.</p>
+<h3 id="Tuples"><a href="#Tuples" class="headerlink" title="Tuples"></a>Tuples</h3><p>Tuple is basically an ordered list of elements.</p>
+<h3 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h3><p>Stream is a sequence of tuples with potentially unbounded number.</p>
     
     <a class="article-more-a" href="/2021/01/15/Stream/#more">more >></a>
     
@@ -1014,6 +1050,16 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>Concurrency Control in distributed system including pessimistic control (such as read-write lock) and optimistic control. Here we discuss the optimistic approaches:</p>
+<h3 id="Basic-approach"><a href="#Basic-approach" class="headerlink" title="Basic approach:"></a>Basic approach:</h3><ol>
+<li>Check for serializability at commit.</li>
+<li>If not, abort, and roll back updates it did.</li>
+</ol>
+<p>This approach may causes other transaction to read dirty data, which may be aborted as well.</p>
+<h3 id="Multi-version-approach"><a href="#Multi-version-approach" class="headerlink" title="Multi-version approach"></a>Multi-version approach</h3><ol>
+<li>For each object, we maintain per-transaction version of it, called <strong>“tentative version”</strong>, and a final version of <strong>“committed version”</strong>.</li>
+<li>“tentative version” has timestamp, sometimes we have timestamp for both read and write.</li>
+<li>On read and write, find the correct version.</li>
+</ol>
     
     <a class="article-more-a" href="/2021/01/15/Optimistic/#more">more >></a>
     

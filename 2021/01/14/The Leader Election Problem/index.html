@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="The Leader Election Problem is classical and has been useful in many variants of systems, including cloud computing systems.">
+  <meta name="description" content="The Leader Election Problem is classical and has been useful in many variants of systems, including cloud computing systems. What is leader ?leader, in the context of solving distributed system proble">
 <meta property="og:type" content="article">
 <meta property="og:title" content="The Leader Election Problem">
 <meta property="og:url" content="https://cyanh1ll.github.io/2021/01/14/The%20Leader%20Election%20Problem/index.html">
 <meta property="og:site_name" content="Yu Wan’s Blog">
-<meta property="og:description" content="The Leader Election Problem is classical and has been useful in many variants of systems, including cloud computing systems.">
+<meta property="og:description" content="The Leader Election Problem is classical and has been useful in many variants of systems, including cloud computing systems. What is leader ?leader, in the context of solving distributed system proble">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194700073.png">
 <meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194719628.png">
@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194759142.png">
 <meta property="og:image" content="https://cyanh1ll.github.io/images/The%20Leader%20Election%20Problem/image-20210119194805323.png">
 <meta property="article:published_time" content="2021-01-15T02:42:10.000Z">
-<meta property="article:modified_time" content="2021-01-20T01:55:39.888Z">
+<meta property="article:modified_time" content="2021-02-02T03:48:00.204Z">
 <meta property="article:author" content="Yu Wan">
 <meta property="article:tag" content="Study Notes">
 <meta property="article:tag" content="Cloud Computing">
@@ -291,13 +291,13 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>The Leader Election Problem is classical and has been useful in many variants of systems, including cloud computing systems.</p>
-<a id="more"></a>
-
 <h2 id="What-is-leader"><a href="#What-is-leader" class="headerlink" title="What is leader ?"></a>What is leader ?</h2><p>leader, in the context of solving distributed system problem, refers to a server who is responsible for receiving all reads and writes. It is useful for coordination among distributed systems.</p>
 <h2 id="Leader-detection-problem"><a href="#Leader-detection-problem" class="headerlink" title="Leader detection problem"></a>Leader detection problem</h2><p>In a group of processes, elect a <strong>leader</strong> and <strong>let everyone know</strong> in the group about this leader.</p>
 <p>When a leader <strong>fails</strong>, by using failure detector, some process will detect this. The focus of election algorithm is to ensure: </p>
 <p><strong>1.</strong> Elect one leader only among the non-failed processes.</p>
 <p><strong>2.</strong> All non-failed processes in the group agree on the (new) leader.</p>
+<a id="more"></a>
+
 <h2 id="Who-call-for-an-election"><a href="#Who-call-for-an-election" class="headerlink" title="Who call for an election?"></a>Who call for an election?</h2><p><strong>Any</strong> process can call (<strong>at most one</strong> at a time) for a election. Multiple processes are allowed to call <strong>simultaneously</strong>, and all of them should <strong>together yield one</strong> leader.  And the result of leader <strong>does not</strong> depend on which process calls for it.</p>
 <p>In the end, the non-faulty process with the <strong>best election attribute value</strong> is elected.</p>
 <h2 id="Ring-Leader-Election"><a href="#Ring-Leader-Election" class="headerlink" title="Ring Leader Election"></a>Ring Leader Election</h2><p>N processes are organized in a logical ring (similar to chord in P2P system).</p>
